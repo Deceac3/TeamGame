@@ -5,14 +5,15 @@
 #include <math.h>
 #include "functions.h"
 
-
+/*
+пишем миниму кода здесь. Это файл инициализаций.
+*/
+    
 int main(void)
 {
     srand(time(NULL));
     system("clear");
     printf("Демо 1.6");
-    int hchose;
-    _Bool cheker,cheker2;
     struct player conecntion;        // Создаём объект класса нашего пользователя, в котором всё будет храниться. Позже мы будем этот объект сохранять и вызывать в будущем
     createHero(&conecntion);        // Передаём разименнованный объект в функции с скриптами создания персоонажа
     while (conecntion.player_alive){
