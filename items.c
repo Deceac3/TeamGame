@@ -10,7 +10,8 @@ struct specialItem bearSkin = {"Медвежья шкура",2, 10};
 struct specialItem theMonkeyBar = {"Посох макакаки",3, 90};
 struct potion healingFlask ={"Зелье востаноления", 1, 15, 8};
 struct potion stoneSkin = {"Зелье каменной кожи",2,5,14};
-
+struct effects playerEffects = {0,0,0,0,0,0,0};     //  базовый объект эффектов для игрока
+struct effects enemyEffects = {0,0,0,0,0,0,0};
 
 //struct enemy wolf = {"Волк",15,4,1,20,2,35,1,wolfSkin};
 //struct enemy bear = {"Медведь",40,10,0,25,1,45,1,bearSkin};
