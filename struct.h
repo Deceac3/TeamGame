@@ -52,6 +52,7 @@ struct player
     int playerHP,playerMaxHp, playerClass, playerMind, playerStrong, playerAgil, playerMoney, playerLvl, playerLvlExp,playerLvlExpNext, playerStage,playerLuck,playerSpeed,PlayerPassiveArmor;
     struct armor PlayerArmor;
     struct weapon playerWeapon;
+    struct effects playerEffects;
 };
 
 /*
@@ -71,3 +72,7 @@ struct potion
     int cost;
 };
 
+struct effects
+{
+    int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
+};
