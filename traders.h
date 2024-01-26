@@ -121,12 +121,17 @@ _Bool magician(struct player* conection, int choose){
             switch (hchosed)
             {
             case 1:
-                
+                conection->playerWeapon.update =1;
+                conection->playerWeapon.damage=conection->playerWeapon.damage+0.5; 
+                return false;
                 break;
             case 2:
+                printf("Удачи тебе!\n");
+                return false;
                 break;
             default:
                 printf("Нет такой команды!\n");
+                return true;
                 break;
             }
             }
@@ -147,7 +152,63 @@ _Bool magician(struct player* conection, int choose){
 }
 
 _Bool ovnerTavern(struct player* conection,int choose){
-
+    _Bool cheker;
+    int hchosed;
+    switch (choose)
+    {
+    case 1:
+        printf("Вот, возьми это письмо и доставь его в столицу трактирщику Нэду, как отдашь принеси его ответ, за это я тебя отблагодарю!\n");//дай инвентарь
+        return false;
+        break;
+    case 2:
+        return true;
+        //где инвентарь, лебовский?
+        break;
+    case 3:
+        return true;
+        //я не шучу
+        break;
+    case 4:
+        printf("Я варю лучшее пиво в округе! 1 кружка стоит 10 монет.\n");
+        if(conection->playerMoney>10){
+            if(conection->playerWeapon.type == 1){
+            printf("Выпыт пыва?\n1)Да\n2)Нет\n");
+            hchosed = IntPlayerChoose();
+            switch (hchosed)
+            {
+            case 1:
+                printf("Прыятного пыва!\n");
+                conection->playerMoney -= 10;
+                conection->playerEffects.armourChanges += 3;
+                conection->playerEffects.damageChanges += 3;
+                conection->playerEffects.speedChanges +=5;
+                conection->playerEffects.luckChanges +=3;
+                return false;
+                break;
+            case 2:
+                printf("Ну хорошо, удачи!\n");
+                return false;
+                break;
+            default:
+                printf("Нет такой команды!\n");
+                return true;
+                break;
+            }
+            }
+        }
+        else{
+            printf("У тебя не достаточно денег!\n");
+        }
+        return false;
+    case 5:
+        printf("До скорых встреч\n");
+        return false;
+        break;
+    default:
+        printf("Нет такой команды!\n");
+        return true;
+        break;
+    }
 }
 
 void tradersMT(struct player* conection){
