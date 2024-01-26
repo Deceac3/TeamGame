@@ -176,6 +176,7 @@ void createHero(struct player* conection){
         }
     conection->playerLvl=1;
     conection->playerLvlExpNext =100;
+    conection->playerEffects=playerEffects;
     system("clear");    
     printf("Вы создали персонажа!\n");
     }
