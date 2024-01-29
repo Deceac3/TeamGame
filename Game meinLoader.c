@@ -13,7 +13,7 @@ int main(void)
 {
     srand(time(NULL));
     system("clear");
-    printf("Демо 1.6");
+    printf("Демо 1.7");
     struct player conecntion;        // Создаём объект класса нашего пользователя, в котором всё будет храниться. Позже мы будем этот объект сохранять и вызывать в будущем
     createHero(&conecntion);        // Передаём разименнованный объект в функции с скриптами создания персоонажа
     while (conecntion.player_alive){

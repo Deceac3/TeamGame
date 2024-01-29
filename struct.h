@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #define NAMES   20
 
 /*
@@ -6,7 +7,6 @@
 3) физическое оружие, которое скелится от ловкости
 4) оружия берсерка - скелится от количества хп\ от количества потерянного хп и т.д 
 */
-
 struct weapon
 {
     char* name;
@@ -45,6 +45,12 @@ struct specialItem
     int itemCost;
 };
 
+struct effects
+{
+    int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
+};
+
+
 struct player 
 {
     _Bool player_alive;
@@ -70,9 +76,4 @@ struct potion
     int potionType;
     int potionValue;
     int cost;
-};
-
-struct effects
-{
-    int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
 };

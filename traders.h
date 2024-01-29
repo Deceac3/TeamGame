@@ -1,4 +1,4 @@
-#include "sup.h"
+#include "struct.h"
 #include "items.c"
 
 _Bool blacksmith(struct player* conection,int choose){
