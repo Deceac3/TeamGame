@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #define NAMES   20
 
 /*
@@ -44,6 +45,12 @@ struct specialItem
     int itemCode;
     int itemCost;
 };
+
+struct effects
+{
+    int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
+};
+
 
 struct player 
 {
