@@ -1,6 +1,7 @@
 #include "struct.h"
 #include "items.c"
 
+// Кузнец. Он улучшает оружие, броню, но не может улучшить магические предметы, артефакты и т.д. Продаёт новые виды брони, оружия и для стрелков стрелы и пули
 _Bool blacksmith(struct player* conection,int choose){
     int hchosed;
     _Bool cheker = true;
@@ -12,6 +13,7 @@ _Bool blacksmith(struct player* conection,int choose){
         break;
     case 2:
         return true;
+        blacksmithTrade(conection);
         //где инвентарь, лебовский?
         break;
     case 3:
@@ -28,10 +30,14 @@ _Bool blacksmith(struct player* conection,int choose){
         case 1:
             hchosed = false;
             if(conection->playerWeapon.type==3 || conection->playerWeapon.type==2){
-                conection->playerWeapon.damage=conection->playerWeapon.damage+0.5;
+                if(conection->playerWeapon.type==3){
+                    conection->playerWeapon.damage=conection->playerWeapon.damage+0.5;
+                }
+                else{
+                    conection->PlayerArmor.defence=conection->PlayerArmor.defence+3;
+                }
             }
             else{
-                conection->PlayerArmor.defence=conection->PlayerArmor.defence+3;
                 printf("Извини, я не умею улучшать оружие магов. Лучше обратись к чародею\n");
             }
             break;
@@ -57,6 +63,7 @@ _Bool blacksmith(struct player* conection,int choose){
     }
 }
 
+//  Травница. Продаёт зелья хила, силы, ловкости и т.д. Даёт разные сайт квесты и может исцелить игрока.
 _Bool herbalist(struct player* conection,int choose){//АААААААААААААААААААААААААААААААА ЖЕНЩИНА АААААААААААААА
     _Bool cheker=true;
     int hchosed;
@@ -95,6 +102,7 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
     }
 }
 
+//  Это колдун. он может улучшить магическое оружие или броню.
 _Bool magician(struct player* conection, int choose){
     _Bool cheker;
     int hchosed;
@@ -151,6 +159,7 @@ _Bool magician(struct player* conection, int choose){
     }
 }
 
+//Квестовый герой, дающий задания, продающий усиливающее пыво
 _Bool ovnerTavern(struct player* conection,int choose){
     _Bool cheker;
     int hchosed;
@@ -211,6 +220,7 @@ _Bool ovnerTavern(struct player* conection,int choose){
     }
 }
 
+//трейдеры основного города MeinTown
 void tradersMT(struct player* conection){
     int hchose;
     _Bool cheker;
@@ -239,6 +249,7 @@ void tradersMT(struct player* conection){
         }
 }
 
+//Выбор трейдеров изходя из города и выбора героя.
 void traderSelector(struct player* conection, int hchose){
     _Bool tradersBool=true;
     int hchosed;
@@ -279,3 +290,107 @@ void traderSelector(struct player* conection, int hchose){
     }
 }
 
+void blacksmithTrade(struct player* conection){
+    _Bool cheker = true;
+    int hchose;
+    printf("У меня самые разнообразные товары на товй вкус! Что ты предпочтёшь? 1)Оружие или 2)броню?\n");
+    
+    while(cheker){
+        hchose = IntPlayerChoose();
+        switch (hchose)
+        {
+        case 1:
+            switch (conection->playerLvl)
+            {
+            case 1:
+                WeaponItemInfo(dagger);
+                WeaponItemInfo(spire);
+                break;
+            case 2:
+                WeaponItemInfo(dagger);
+                WeaponItemInfo(thiefsBlade);
+                WeaponItemInfo(spire);
+                WeaponItemInfo(twoHandedSword);
+                break;
+            default:
+                break;
+            }
+            break;
+        case 2:
+            switch (conection->playerLvl)
+            {
+            case 1:
+                ArmorItenInfo(rags);
+                ArmorItenInfo(armour);
+                ArmorItenInfo(robe);
+                break;
+            case 2:
+                ArmorItenInfo(rags);
+                ArmorItenInfo(armour);
+                ArmorItenInfo(robe);
+                ArmorItenInfo(HiddenChainmail);
+                ArmorItenInfo(MehaArmor);
+                ArmorItenInfo(cultRobe);
+                break;
+            default:
+                break;
+            }
+                break;
+            default:
+                printf("Вы ввели неверный номер опции, попробуйте ещё раз!\n");
+                break;
+        }
+    }
+}
+
+void ArmorItenInfo(struct armor armor){
+    switch (armor.update)
+    {
+    case 0:
+        printf("Это \"%s\". Оно даёт %d дополнительной защиты. Стоит %d монет. Броня не улучшена\n", armor.name, armor.defence,armor.cost);
+        break;
+    case 1:
+        printf("Это \"%s\". Оно даёт %d дополнительной защиты. Стоит %d монет. Броня улучшена\n", armor.name, armor.defence,armor.cost);
+        break;
+    }
+    
+}
+
+void WeaponItemInfo(struct weapon weapon){
+    switch (weapon.type)
+    {
+    case 1:
+        switch (weapon.update)
+        {
+        case 0:
+            printf("Это \"%s\" | магическое оружие. Оно повышает урон в %d раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n");
+            break;
+        case 1:
+            printf("Это \"%s\" | магическое оружие. Оно повышает урон в %d раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n");
+            break;
+        }
+        break;
+    case 2:
+        switch (weapon.update)
+        {
+        case 0:
+            printf("Это \"%s\" | физическое оружие зависящее от силы. Оно повышает урон в %d раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n");
+            break;
+        case 1:
+            printf("Это \"%s\" | физическое оружие зависящее от силы. Оно повышает урон в %d раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n");
+            break;
+        }
+        break;
+    case 3:
+        switch (weapon.update)
+        {
+        case 0:
+            printf("Это \"%s\" | физическое оружие зависящее от ловкости. Оно повышает урон в %d раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n");
+            break;
+        case 1:
+            printf("Это \"%s\" | физическое оружие зависящее от ловкости. Оно повышает урон в %d раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n");
+            break;
+        }
+        break;
+    }
+}
