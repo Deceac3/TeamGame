@@ -16,8 +16,15 @@ struct armor cultRobe = {"Роба культиста",4,10,0};
 struct specialItem wolfSkin = {"Волчья шкура",1,5};
 struct specialItem bearSkin = {"Медвежья шкура",2, 10};
 struct specialItem theMonkeyBar = {"Посох макакаки",3, 90};
+
 struct potion healingFlask ={"Зелье востаноления", 1, 15, 8};
 struct potion stoneSkin = {"Зелье каменной кожи",2,5,14};
+struct potion magicEssence={"Зелье магической эсенсии",3,8,10};
+struct potion agilSkils ={"Зелье ловкости",4,8,10};
+struct potion strongEssence={"Зелье силы",5,8,10};
+struct potion speedEssence ={"Зелье скорости", 6,5,20};
+struct potion luckEssence ={"Зелье удачи",7,2,30};
+
 struct effects playerEffects = {0,0,0,0,0,0,0};     //  базовый объект эффектов для игрока
 struct effects enemyEffects = {0,0,0,0,0,0,0};     //   отсутствие эффектов на противнике тоже должно записываться. Если противников будет несколько то нужно больше объектов этих структур
 

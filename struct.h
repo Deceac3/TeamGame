@@ -35,7 +35,8 @@ struct enemy
     int moneyOut;
     int speed;
     int rangeAtack;
-    struct specialItem;
+    struct specialItem specialItem;
+    struct effects enemyEffects;
 };
 
 struct specialItem
@@ -50,6 +51,11 @@ struct effects
     int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
 };
 
+struct playerPotionsBag
+{
+    int healingFlaskCount,stoneSkinCount,magicEssenceCount,agilSkilsCount,strongEssenceCount,speedEssenceCount,luckEssenceCount;
+    struct potion healingFlask,stoneSkin,magicEssence,agilSkils,strongEssence,speedEssence,luckEssence;
+};
 
 struct player 
 {
@@ -59,6 +65,7 @@ struct player
     struct armor PlayerArmor;
     struct weapon playerWeapon;
     struct effects playerEffects;
+    struct playerPotionsBag playerPotionsBag;
 };
 
 /*
