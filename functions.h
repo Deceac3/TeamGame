@@ -1,4 +1,3 @@
-#include "struct.h"
 #include "traders.h"
 /*  
 ПОСЛАНИЕ ПРЕДКАМ!!!! Нужно помнить что язык си работает с памятью и очень любит её копировать. 
@@ -205,6 +204,7 @@ void info(struct player* conection){
         break;
     }
     printf("Опыт %d/%d. Уровень %d, здоровье %d/%d, скорость в бою %d и броня %d.\n", conection->playerLvlExp,conection->playerLvlExpNext,conection->playerLvl,conection->playerHP,conection->playerMaxHp,conection->playerSpeed,conection->PlayerPassiveArmor+conection->PlayerArmor.defence);
+    printf("Ваше оружие %s, ваша броня %s\n", conection->playerWeapon.name,conection->PlayerArmor.name);
 };
 
 int randexpf(int x){
@@ -389,12 +389,11 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     printf("Вы %d|%d hp            противник %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->hp);
     sleep(1);
     while(enemy->hp>0 && conection->playerHP>0){
-        system('clear');
+        system("clear");
         printf("между вами и противником %d метров\n", range);
         switch (nextStep(conection,enemy,&shortplayerspeed, &enemyMooveSpeed))
         {
         case 1:
-        printf("%d к %d",range,conection->playerWeapon.range);
             if(range>conection->playerWeapon.range){
                 printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
             }
@@ -553,4 +552,8 @@ void gameSelectMenu(struct player* conecntion){
     printf("Программа окончена! %s\n", conecntion->playerName);
     return 0;
 }
+}
+
+void statusEffectsPlayer(struct player* conection){
+    printf("");
 }

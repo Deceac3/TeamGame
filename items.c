@@ -17,6 +17,10 @@ struct specialItem wolfSkin = {"Волчья шкура",1,5};
 struct specialItem bearSkin = {"Медвежья шкура",2, 10};
 struct specialItem theMonkeyBar = {"Посох макакаки",3, 90};
 
+/*
+Это базовый пак зелек  
+*/
+
 struct potion healingFlask ={"Зелье востаноления", 1, 15, 8};
 struct potion stoneSkin = {"Зелье каменной кожи",2,5,14};
 struct potion magicEssence={"Зелье магической эсенсии",3,8,10};

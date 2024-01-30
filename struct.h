@@ -1,12 +1,30 @@
-#include <stdbool.h>
-#define NAMES   20
-
 /*
 1) магическое оружие. Скелится от магии.
 2) физическое оружие, Склится от количества силы
 3) физическое оружие, которое скелится от ловкости
 4) оружия берсерка - скелится от количества хп\ от количества потерянного хп и т.д 
 */
+
+struct effects
+{
+    int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
+};
+
+struct specialItem
+{
+    char* itemName;
+    int itemCode;
+    int itemCost;
+};
+
+struct potion
+{
+    char* potionName;
+    int potionType;
+    int potionValue;
+    int cost;
+};
+
 struct weapon
 {
     char* name;
@@ -39,18 +57,6 @@ struct enemy
     struct effects enemyEffects;
 };
 
-struct specialItem
-{
-    char* itemName;
-    int itemCode;
-    int itemCost;
-};
-
-struct effects
-{
-    int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
-};
-
 struct playerPotionsBag
 {
     int healingFlaskCount,stoneSkinCount,magicEssenceCount,agilSkilsCount,strongEssenceCount,speedEssenceCount,luckEssenceCount;
@@ -77,10 +83,3 @@ struct player
 зулья типа 7 - повышают удачу
 */
 
-struct potion
-{
-    char* potionName;
-    int potionType;
-    int potionValue;
-    int cost;
-};
