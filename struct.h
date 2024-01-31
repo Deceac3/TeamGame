@@ -1,10 +1,3 @@
-/*
-1) магическое оружие. Скелится от магии.
-2) физическое оружие, Склится от количества силы
-3) физическое оружие, которое скелится от ловкости
-4) оружия берсерка - скелится от количества хп\ от количества потерянного хп и т.д 
-*/
-
 struct effects
 {
     int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
@@ -25,6 +18,15 @@ struct potion
     int cost;
 };
 
+/*
+1) магическое оружие. Скелится от магии.
+2) физическое оружие, Склится от количества силы
+3) физическое оружие, которое скелится от ловкости
+4) оружия берсерка - скелится от количества хп\ от количества потерянного хп и т.д 
+*/
+
+
+
 struct weapon
 {
     char* name;
@@ -41,6 +43,21 @@ struct armor
     int defence;
     int cost;
     int update;
+};
+
+struct class
+{
+    int classId;
+    int hp;
+    int str;
+    int agil;
+    int mind;
+    int armourPassive;
+    int luck;
+    int startSpeed;
+    int money;
+    struct weapon classWeapon;
+    struct armor classArmour;
 };
 
 struct enemy

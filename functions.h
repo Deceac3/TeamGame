@@ -64,50 +64,17 @@ void createHero(struct player* conection){
             {
             case 1:
                 printf("Вы выбрали класс мага\n");
-                conection->PlayerPassiveArmor = 2;
-                conection->playerClass = 1;
-                conection->playerMind = 3;
-                conection->playerAgil = 2;
-                conection->playerStrong = 1;
-                conection->playerMoney = 2;
-                conection->playerLuck = 4;
-                conection->playerSpeed = 40;
-                conection->playerWeapon = staff;
-                conection->PlayerArmor = robe;
-                conection->playerMaxHp = 50;
-                conection->playerHP = 50;
+                classSelector(conection,mag);
                 cheker = false;
                 break;
             case 2:
                 printf("Вы выбрали класс вора\n");
-                conection->PlayerPassiveArmor = 3;
-                conection->playerClass = 2;
-                conection->playerMind = 1;
-                conection->playerAgil = 6;
-                conection->playerStrong = 2;
-                conection->playerMoney = 10;
-                conection->playerLuck = 3;
-                conection->playerSpeed = 20;
-                conection->playerWeapon =dagger;
-                conection->PlayerArmor = rags;
-                conection->playerMaxHp = 70;
-                conection->playerHP = 70;
+                classSelector(conection,theif);
                 cheker = false;
                 break;
             case 3:
                 printf("Вы выбрали класс танка\n");
-                conection->PlayerPassiveArmor = 4;
-                conection->playerClass = 3;
-                conection->playerMind = 1;
-                conection->playerAgil = 2;
-                conection->playerStrong = 3;
-                conection->playerMoney = 7;
-                conection->playerLuck = 1;
-                conection->playerSpeed = 30;
-                conection->playerWeapon = spire;
-                conection->PlayerArmor = armour;
-                conection->playerMaxHp = 100;
-                conection->playerHP = 100;
+                classSelector(conection,tank);
                 cheker = false;
                 break;
             default:
@@ -556,4 +523,19 @@ void gameSelectMenu(struct player* conecntion){
 
 void statusEffectsPlayer(struct player* conection){
     printf("");
+}
+
+void classSelector(struct player* conection, struct class class){
+    conection->PlayerPassiveArmor = class.armourPassive;
+    conection->playerClass = class.classId;
+    conection->playerMind = class.mind;
+    conection->playerAgil = class.agil;
+    conection->playerStrong = class.str;
+    conection->playerMoney = class.money;
+    conection->playerLuck =class.luck;
+    conection->playerSpeed = class.startSpeed;
+    conection->playerWeapon = class.classWeapon;
+    conection->PlayerArmor = class.classWeapon;
+    conection->playerMaxHp = class.hp;
+    conection->playerHP = class.hp;
 }
