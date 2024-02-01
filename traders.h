@@ -179,7 +179,7 @@ _Bool ovnerTavern(struct player* conection,int choose){
         break;
     case 4:
         printf("Я варю лучшее пиво в округе! 1 кружка стоит 10 монет.\n");
-        if(conection->playerMoney>10){
+        if(conection->playerMoney>=10){
             if(conection->playerWeapon.type == 1){
             printf("Выпыт пыва?\n1)Да\n2)Нет\n");
             hchosed = IntPlayerChoose();
