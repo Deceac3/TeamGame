@@ -104,12 +104,12 @@ void createHero(struct player* conection){
         case 2:
             cheker=true;
             int freexp = 15;
-            printf("Сколько очков вы бы хотели вложить в интелект? свободных очков у вас: 15\15 \n");
+            printf("Сколько очков вы бы хотели вложить в интелект? свободных очков у вас: 15/15 \n");
             while(cheker){
             hchose = IntPlayerChoose();
             if(hchose <= 15 & hchose >= 0){
-                conection->playerMind = hchose;
-                freexp = freexp-conection->playerMind;
+                conection->playerMind += hchose;
+                freexp = freexp-hchose;
                 cheker = false;
                 printf("Вы вложили %d очков в интелект. У вас осталось %d очков\n", conection->playerMind, freexp);
             }
@@ -123,8 +123,8 @@ void createHero(struct player* conection){
                 while(cheker){
                 hchose =IntPlayerChoose();
                 if(hchose <= freexp & hchose >=0){
-                    conection->playerStrong = hchose;
-                    freexp = freexp - conection->playerStrong;
+                    conection->playerStrong += hchose;
+                    freexp = freexp - hchose;
                     cheker = false;
                     printf("Вы вложили %d очков в силу. У вас осталось %d очков\n", conection->playerStrong,freexp);
                 }
@@ -133,7 +133,7 @@ void createHero(struct player* conection){
                 }
                 }
             }
-            conection->playerAgil = freexp;
+            conection->playerAgil += freexp;
             printf("Оставшиеся очки опыта добавляются вашей ловкости. Ваша ловкость: %d\n", conection->playerAgil);
             cheker2 = false;
             break;
@@ -353,9 +353,11 @@ void fightInRandomTrevel(struct player* conection,int enemy){
 void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     int playerMooveSpeed=conection->playerSpeed, range=4,playerchoose, shortplayerspeed = conection->playerSpeed;
     printf("В ходе вашего путешествия перед вами появляется %s\nБитва началась!\n", enemy->enemyName);
-    printf("Вы %d|%d hp            противник %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->hp);
     while(enemy->hp>0 && conection->playerHP>0){
-        printf("между вами и противником %d метров\n", range);
+        sleep(3);
+        system("clear");
+        printf("Вы %d|%d hp            %s %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->enemyName,enemy->hp);
+        printf("расстояние %d метров\n", range);
         switch (nextStep(conection,enemy,&shortplayerspeed, &enemyMooveSpeed))
         {
         case 1:

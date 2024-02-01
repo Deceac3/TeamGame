@@ -43,7 +43,7 @@ void ClassLoader(){
     mag.classWeapon = staff;
     mag.classArmour = robe;
     theif.classWeapon = dagger;
-    theif.classArmour=rags;
-    tank.classArmour=armour;
-    tank.classWeapon=spire;
+    theif.classArmour = rags;
+    tank.classArmour = armour;
+    tank.classWeapon = spire;
 }
