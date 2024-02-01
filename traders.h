@@ -266,8 +266,8 @@ void traderSelector(struct player* conection, int hchose){
                 hchose = IntPlayerChoose();
                 tradersBool=blacksmith(conection,hchose);
                 cheker=false;
-                break;
                 }
+                break;
             case 2:
                 printf("Вы подходите к травнице. ");
                 while(tradersBool){
@@ -275,8 +275,8 @@ void traderSelector(struct player* conection, int hchose){
                 hchose = IntPlayerChoose();
                 tradersBool=herbalist(conection,hchose);
                 cheker=false;
-                break;
                 }
+                break;
             case 3:
                 printf("Вы подходите к чародею. ");
                 while(tradersBool){
@@ -284,8 +284,8 @@ void traderSelector(struct player* conection, int hchose){
                 hchose = IntPlayerChoose();
                 tradersBool=magician(conection,hchose);
                 cheker=false;
-                break;
                 }
+                break;
             case 4:
                 printf("Вы подходите к владельцу таверны. ");
                 while(tradersBool){
@@ -293,8 +293,8 @@ void traderSelector(struct player* conection, int hchose){
                 hchose = IntPlayerChoose();
                 tradersBool=ovnerTavern(conection,hchose);
                 cheker=false;
-                break;
                 }
+                break;
             default:
                 printf("Вы выбрали неверный номер опции,попробуйте снова.\n");
                 break;
@@ -309,7 +309,6 @@ void blacksmithTrade(struct player* conection){
     _Bool cheker = true;
     int hchose;
     printf("У меня самые разнообразные товары на товй вкус! Что ты предпочтёшь? 1)Оружие или 2)броню?\n");
-    
     while(cheker){
         hchose = IntPlayerChoose();
         switch (hchose)
@@ -320,12 +319,14 @@ void blacksmithTrade(struct player* conection){
             case 1:
                 WeaponItemInfo(dagger);
                 WeaponItemInfo(spire);
+                cheker=false;
                 break;
             case 2:
                 WeaponItemInfo(dagger);
                 WeaponItemInfo(thiefsBlade);
                 WeaponItemInfo(spire);
                 WeaponItemInfo(twoHandedSword);
+                cheker=false;
                 break;
             default:
                 break;
@@ -338,6 +339,7 @@ void blacksmithTrade(struct player* conection){
                 ArmorItenInfo(rags);
                 ArmorItenInfo(armour);
                 ArmorItenInfo(robe);
+                cheker=false;
                 break;
             case 2:
                 ArmorItenInfo(rags);
@@ -346,14 +348,14 @@ void blacksmithTrade(struct player* conection){
                 ArmorItenInfo(HiddenChainmail);
                 ArmorItenInfo(MehaArmor);
                 ArmorItenInfo(cultRobe);
+                cheker=false;
                 break;
             default:
                 break;
             }
-                break;
-            default:
-                printf("Вы ввели неверный номер опции, попробуйте ещё раз!\n");
-                break;
+        default:
+            printf("Вы ввели неверный номер опции, попробуйте ещё раз!\n");
+            break;
         }
     }
 }
