@@ -354,9 +354,7 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     int playerMooveSpeed=conection->playerSpeed, range=4,playerchoose, shortplayerspeed = conection->playerSpeed;
     printf("В ходе вашего путешествия перед вами появляется %s\nБитва началась!\n", enemy->enemyName);
     printf("Вы %d|%d hp            противник %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->hp);
-    sleep(1);
     while(enemy->hp>0 && conection->playerHP>0){
-        system("clear");
         printf("между вами и противником %d метров\n", range);
         switch (nextStep(conection,enemy,&shortplayerspeed, &enemyMooveSpeed))
         {
@@ -535,7 +533,7 @@ void classSelector(struct player* conection, struct class class){
     conection->playerLuck =class.luck;
     conection->playerSpeed = class.startSpeed;
     conection->playerWeapon = class.classWeapon;
-    conection->PlayerArmor = class.classWeapon;
+    conection->PlayerArmor = class.classArmour;
     conection->playerMaxHp = class.hp;
     conection->playerHP = class.hp;
 }
