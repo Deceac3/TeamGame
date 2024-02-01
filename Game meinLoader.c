@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include "functions.h"
-
+//тут была костыльная рожа
 /*
 пишем миниму кода здесь. Это файл инициализаций.
 */
