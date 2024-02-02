@@ -1,7 +1,26 @@
 #include "traders.h"
+
+/*
+Пояснение к ведению боя!!! Во время битвы будет учитываться несколько основополагающих вещей. 1 - расстояние до цели, 2 - скорость атаки 3 - дальность атаки. 
+Индетично перечислению, идёт градация приоритетов. Первым ходит тот, у кого задержка перед ударом меньше всего ходит первым. Ему на выбор будет несколько команд.
+1) сделать шаг вперёд или 2) сделать шаг назад. Это либо увеличивает либо уменьшает расстояние между вами и целью. если расстояние между вами и целью будет больше дальности атаки,
+то данная функция вам будет недоступна.
+3) атаковать противника 4) использовать предметы( в будущем) 
+*/
+
+
 float arrmorK(int armor){
     float k = 0.12;
     return (1-(k*armor/(1+k*abs(armor))));
+}
+
+_Bool PlayerHealth(int helth){
+    if(helth<=0){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* rangeuk){
@@ -131,7 +150,6 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     }
 }
 
-
 void damageTaken(struct player* conection, struct enemy* enemy){
     int chance;
     int randCh = rand()%100;
@@ -153,7 +171,6 @@ void damageTaken(struct player* conection, struct enemy* enemy){
         }
     }
 }
-
 
 int missChance(int agil){
     float k = 0.07;

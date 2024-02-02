@@ -39,7 +39,7 @@ struct class mag = {1,50,1,2,3,2,4,50,2};
 struct class theif = {2,70,2,6,1,3,3,30,10};
 struct class tank = {3,100,4,2,1,4,1,40,7};
 
-void ClassLoader(){
+void PreLoader(){
     mag.classWeapon = staff;
     mag.classArmour = robe;
     theif.classWeapon = dagger;

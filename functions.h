@@ -103,7 +103,6 @@ void createHero(struct player* conection){
     printf("Вы создали персонажа!\n");
     }
     info(conection);
-    sleep(3);
     printf("Переносим вас в город!\n");
     system("clear");
     conection->playerStage = 1;
@@ -111,6 +110,8 @@ void createHero(struct player* conection){
 }
 
 void info(struct player* conection){
+    char xxx;
+    printf("Нажмите Enter, чтобы перейти в меню\n");
     switch(conection->playerClass)
     {
     case 1:
@@ -127,6 +128,7 @@ void info(struct player* conection){
     }
     printf("Опыт %d/%d. Уровень %d, здоровье %d/%d, скорость в бою %d и броня %d.\n", conection->playerLvlExp,conection->playerLvlExpNext,conection->playerLvl,conection->playerHP,conection->playerMaxHp,conection->playerSpeed,conection->PlayerPassiveArmor+conection->PlayerArmor.defence);
     printf("Ваше оружие %s, ваша броня %s\n", conection->playerWeapon.name,conection->PlayerArmor.name);
+    scanf("%c",&xxx);
 };
 
 int randexpf(int x){
@@ -140,14 +142,6 @@ int IntPlayerChoose(){
     if (fgets(buf, sizeof buf, stdin))return x;
 };
 
-_Bool PlayerHealth(int helth){
-    if(helth<=0){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
 void LvlExperienceUp(struct player* conection){
     switch (conection->playerLvl)
     {
@@ -248,14 +242,6 @@ void TrevelLobby(int hchose, int* cheker,struct player* conection){
     }
 }
 
-/*
-Пояснение к ведению боя!!! Во время битвы будет учитываться несколько основополагающих вещей. 1 - расстояние до цели, 2 - скорость атаки 3 - дальность атаки. 
-Индетично перечислению, идёт градация приоритетов. Первым ходит тот, у кого задержка перед ударом меньше всего ходит первым. Ему на выбор будет несколько команд.
-1) сделать шаг вперёд или 2) сделать шаг назад. Это либо увеличивает либо уменьшает расстояние между вами и целью. если расстояние между вами и целью будет больше дальности атаки,
-то данная функция вам будет недоступна.
-3) атаковать противника 4) использовать предметы( в будущем) 
-*/
-
 void gameSelectMenu(struct player* conecntion){
     int hchose;
     _Bool cheker;
@@ -284,7 +270,6 @@ void gameSelectMenu(struct player* conecntion){
                 case 3:
                     system("clear");
                     info(conecntion);
-                    sleep(4);
                     system("clear");
                     break;
                 case 4:
