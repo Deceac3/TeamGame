@@ -24,7 +24,6 @@ _Bool PlayerHealth(int helth){
 }
 
 _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* rangeuk){
-    system("clear");
     switch (chose)
     {
     case 1:
@@ -78,32 +77,13 @@ void RandomTrevelForTresure(struct player* conection){
 }
 
 void fightInRandomTrevel(struct player* conection,int enemy){
-    int exp,gold,enemyMooveSpeed;
-    switch (enemy)
-    {
-    case 1:
-        enemyMooveSpeed= wolf.speed;
-        Batle(conection,enemyMooveSpeed,&wolf);
-        exp = wolf.expOut;
-        gold = wolf.moneyOut;
-        break;  
-    case 2:
-        enemyMooveSpeed=bear.speed;
-        Batle(conection,enemyMooveSpeed,&bear);
-        exp = bear.expOut;
-        gold = bear.moneyOut;
-        break;
-    case 3:
-        enemyMooveSpeed=monkey.speed;
-        Batle(conection,enemyMooveSpeed,&monkey);
-        exp = monkey.expOut;
-        gold = monkey.moneyOut;
-        break;
-    default:
-        break;
-    }
-    conection->playerLvlExp += exp;
-    conection->playerLvlExp += gold;
+    int enemyMooveSpeed;
+    struct enemy NextEnemy;
+    NextEnemy=EnemysArray[enemy];
+    enemyMooveSpeed=NextEnemy.speed;
+    Batle(conection,enemyMooveSpeed,&NextEnemy);
+    conection->playerLvlExp += NextEnemy.expOut;
+    conection->playerLvlExp += NextEnemy.moneyOut;
     printf("Вам удалось победить противника!\n");
     LvlExperienceUp(conection);
 }
