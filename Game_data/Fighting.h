@@ -79,7 +79,7 @@ void RandomTrevelForTresure(struct player* conection){
 void fightInRandomTrevel(struct player* conection,int enemy){
     int enemyMooveSpeed;
     struct enemy NextEnemy;
-    NextEnemy=EnemysArray[enemy];
+    NextEnemy=EnemysArray[enemy-1];
     enemyMooveSpeed=NextEnemy.speed;
     Batle(conection,enemyMooveSpeed,&NextEnemy);
     conection->playerLvlExp += NextEnemy.expOut;
