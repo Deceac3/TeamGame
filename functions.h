@@ -285,18 +285,21 @@ void gameSelectMenu(struct player* conecntion){
             }
             break;
         break;
-    
-    default:
-        break;
     case 2:
         printf("TOWN 2");
-    printf("Программа окончена! %s\n", conecntion->playerName);
-    return 0;
+        printf("Программа окончена! %s\n", conecntion->playerName);
+        break;
+        return 0;
+    default:
+        break;
 }
 }
 
 void statusEffectsPlayer(struct player* conection){
-    printf("");
+    printf("Ваши эффекты:\nброня - %d\nурон - %d\nинтелект - %d\nловкость - %d\nсила - %d\nскорость - %d\nудача - %d\n",
+    conection->playerEffects.armourChanges,conection->playerEffects.damageChanges,conection->playerEffects.mindChanges,
+    conection->playerEffects.agilChanges,conection->playerEffects.strongChanges,conection->playerEffects.speedChanges,
+    conection->playerEffects.luckChanges);
 }
 
 void classSelector(struct player* conection, struct class class){
@@ -312,4 +315,56 @@ void classSelector(struct player* conection, struct class class){
     conection->PlayerArmor = class.classArmour;
     conection->playerMaxHp = class.hp;
     conection->playerHP = class.hp;
+}
+
+void ArmorItemInfo(struct armor armor){
+    switch (armor.update)
+    {
+    case 0:
+        printf("Это \"%s\". Оно даёт %d дополнительной защиты. Стоит %d монет. Броня не улучшена\n", armor.name, armor.defence,armor.cost);
+        break;
+    case 1:
+        printf("Это \"%s\". Оно даёт %d дополнительной защиты. Стоит %d монет. Броня улучшена\n", armor.name, armor.defence,armor.cost);
+        break;
+    }
+    
+}
+
+void WeaponItemInfo(struct weapon weapon){
+    switch (weapon.type)
+    {
+    case 1:
+        switch (weapon.update)
+        {
+        case 0:
+            printf("Это \"%s\" | магическое оружие. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
+            break;
+        case 1:
+            printf("Это \"%s\" | магическое оружие. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
+            break;
+        }
+        break;
+    case 2:
+        switch (weapon.update)
+        {
+        case 0:
+            printf("Это \"%s\" | физическое оружие зависящее от силы. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
+            break;
+        case 1:
+            printf("Это \"%s\" | физическое оружие зависящее от силы. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
+            break;
+        }
+        break;
+    case 3:
+        switch (weapon.update)
+        {
+        case 0:
+            printf("Это \"%s\" | физическое оружие зависящее от ловкости. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
+            break;
+        case 1:
+            printf("Это \"%s\" | физическое оружие зависящее от ловкости. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
+            break;
+        }
+        break;
+    }
 }

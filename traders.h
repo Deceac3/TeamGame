@@ -336,18 +336,18 @@ void blacksmithTrade(struct player* conection){
             switch (conection->playerLvl)
             {
             case 1:
-                ArmorItenInfo(rags);
-                ArmorItenInfo(armour);
-                ArmorItenInfo(robe);
+                ArmorItemInfo(rags);
+                ArmorItemInfo(armour);
+                ArmorItemInfo(robe);
                 cheker=false;
                 break;
             case 2:
-                ArmorItenInfo(rags);
-                ArmorItenInfo(armour);
-                ArmorItenInfo(robe);
-                ArmorItenInfo(HiddenChainmail);
-                ArmorItenInfo(MehaArmor);
-                ArmorItenInfo(cultRobe);
+                ArmorItemInfo(rags);
+                ArmorItemInfo(armour);
+                ArmorItemInfo(robe);
+                ArmorItemInfo(HiddenChainmail);
+                ArmorItemInfo(MehaArmor);
+                ArmorItemInfo(cultRobe);
                 cheker=false;
                 break;
             default:
@@ -357,57 +357,5 @@ void blacksmithTrade(struct player* conection){
             printf("Вы ввели неверный номер опции, попробуйте ещё раз!\n");
             break;
         }
-    }
-}
-
-void ArmorItenInfo(struct armor armor){
-    switch (armor.update)
-    {
-    case 0:
-        printf("Это \"%s\". Оно даёт %d дополнительной защиты. Стоит %d монет. Броня не улучшена\n", armor.name, armor.defence,armor.cost);
-        break;
-    case 1:
-        printf("Это \"%s\". Оно даёт %d дополнительной защиты. Стоит %d монет. Броня улучшена\n", armor.name, armor.defence,armor.cost);
-        break;
-    }
-    
-}
-
-void WeaponItemInfo(struct weapon weapon){
-    switch (weapon.type)
-    {
-    case 1:
-        switch (weapon.update)
-        {
-        case 0:
-            printf("Это \"%s\" | магическое оружие. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
-            break;
-        case 1:
-            printf("Это \"%s\" | магическое оружие. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
-            break;
-        }
-        break;
-    case 2:
-        switch (weapon.update)
-        {
-        case 0:
-            printf("Это \"%s\" | физическое оружие зависящее от силы. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
-            break;
-        case 1:
-            printf("Это \"%s\" | физическое оружие зависящее от силы. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
-            break;
-        }
-        break;
-    case 3:
-        switch (weapon.update)
-        {
-        case 0:
-            printf("Это \"%s\" | физическое оружие зависящее от ловкости. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие не улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
-            break;
-        case 1:
-            printf("Это \"%s\" | физическое оружие зависящее от ловкости. Оно повышает урон в %.2f раз. Дальность Атаки %d. Стоимость оружия %d. Оружие улучшенно\n",weapon.name,weapon.damage,weapon.range,weapon.cost);
-            break;
-        }
-        break;
     }
 }
