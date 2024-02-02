@@ -13,8 +13,8 @@
 
 int main(void)
 {
-    srand(time(NULL));    
-    system("clear"); 
+    srand(time(NULL));
+    system("clear");
     printf("Демо 1.91");
     PreLoader();              // Догружаем микропроцессы присваивания классов и т.д. читайте прато
     struct player conecntion;        // Создаём объект класса нашего пользователя, в котором всё будет храниться. Позже мы будем этот объект сохранять и вызывать в будущем
@@ -23,4 +23,3 @@ int main(void)
         gameSelectMenu(&conecntion);
     }
 }
-
