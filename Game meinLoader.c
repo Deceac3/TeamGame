@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
-#include "functions.h"
+#include "Game_data/functions.h"
 //тут был староста
 //тут была костыльная рожа
 //Тут был нормальный пацан...
