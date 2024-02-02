@@ -32,9 +32,10 @@ struct potion luckEssence ={"Зелье удачи",7,2,30};
 struct effects playerEffects = {0,0,0,0,0,0,0};     //  базовый объект эффектов для игрока
 struct effects enemyEffects = {0,0,0,0,0,0,0};     //   отсутствие эффектов на противнике тоже должно записываться. Если противников будет несколько то нужно больше объектов этих структур
 
-//struct enemy wolf = {"Волк",15,4,1,20,2,35,1,wolfSkin};
-//struct enemy bear = {"Медведь",40,10,0,25,1,45,1,bearSkin};
-//struct enemy monkey = {"Макака",20,6,3,20,4,40,2,theMonkeyBar};
+struct enemy wolf = {"Волк",15,4,1,20,2,35,1};
+struct enemy bear = {"Медведь",40,10,0,25,1,45,1};
+struct enemy monkey = {"Макака",20,6,3,20,4,40,2};
+
 struct class mag = {1,50,1,2,3,2,4,50,2};
 struct class theif = {2,70,2,6,1,3,3,30,10};
 struct class tank = {3,100,4,2,1,4,1,40,7};
@@ -46,4 +47,7 @@ void PreLoader(){
     theif.classArmour = rags;
     tank.classArmour = armour;
     tank.classWeapon = spire;
+    wolf.specialItem =wolfSkin;
+    bear.specialItem =bearSkin;
+    monkey.specialItem = theMonkeyBar;
 }

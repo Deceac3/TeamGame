@@ -82,21 +82,18 @@ void fightInRandomTrevel(struct player* conection,int enemy){
     switch (enemy)
     {
     case 1:
-        struct enemy wolf = {"Волк",15,4,1,20,2,35,1,wolfSkin,enemyEffects};
         enemyMooveSpeed= wolf.speed;
         Batle(conection,enemyMooveSpeed,&wolf);
         exp = wolf.expOut;
         gold = wolf.moneyOut;
         break;  
     case 2:
-        struct enemy bear = {"Медведь",40,10,0,25,1,45,1,bearSkin,enemyEffects};
         enemyMooveSpeed=bear.speed;
         Batle(conection,enemyMooveSpeed,&bear);
         exp = bear.expOut;
         gold = bear.moneyOut;
         break;
     case 3:
-        struct enemy monkey = {"Макака",20,6,3,20,4,40,2,theMonkeyBar,enemyEffects};
         enemyMooveSpeed=monkey.speed;
         Batle(conection,enemyMooveSpeed,&monkey);
         exp = monkey.expOut;
