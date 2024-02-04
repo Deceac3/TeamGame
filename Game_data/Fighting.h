@@ -208,7 +208,7 @@ int WeaponDamage(struct player* conection){
 //При необходимость броска кости (не важной какого типа), передаём в функцию номер кости и на выходе получаем результат выпавшей кости.
 int DiceNumb(int Numb){
     int result;
-    result =rand%Numb;
+    result = rand()%Numb;
     printf("Вы бросаете кость d%d. Вам выпадает %d\n", Numb, result);
     return result;
 }

@@ -13,9 +13,10 @@ struct armor MehaArmor = {"Механическая броня",8,30,0};
 struct armor robe = {"Роба", 2,6,0};    // Базовая броня мага
 struct armor cultRobe = {"Роба культиста",4,10,0};
 
-struct specialItem wolfSkin = {"Волчья шкура",1,5};
-struct specialItem bearSkin = {"Медвежья шкура",2, 10};
-struct specialItem theMonkeyBar = {"Посох макакаки",3, 90};
+struct GameItem wolfSkin = {"Волчья шкура",1,5};
+struct GameItem bearSkin = {"Медвежья шкура",1, 10};
+struct GameItem theMonkeyBar = {"Посох макакаки",1, 90};
+struct GameItem flowerOfRestoration = {"Цветок востановления",1,6};
 
 /*
 Это базовый пак зелек  
@@ -50,9 +51,9 @@ void PreLoader(struct enemy* EnemysArray){
     tank.classArmour = armour;
     tank.classWeapon = spire;
     //снизу представленна запись особых предметов в структуры противников
-    wolf.specialItem = wolfSkin;
-    bear.specialItem = bearSkin;
-    monkey.specialItem = theMonkeyBar;
+    wolf.GameItem = wolfSkin;
+    bear.GameItem = bearSkin;
+    monkey.GameItem = theMonkeyBar;
     //снизу представленна запись предметов в массив структур
     EnemysArray[0]=wolf;
     EnemysArray[1]=bear;

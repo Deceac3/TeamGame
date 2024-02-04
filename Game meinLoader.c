@@ -15,7 +15,7 @@ int main(void)
 {
     srand(time(NULL));
     system("clear");
-    printf("Демо 2.0");
+    printf("Версия 21");
     EnemysArray =malloc(EnemysCount*sizeof(struct enemy));
     PreLoader(EnemysArray);              // Догружаем микропроцессы присваивания классов и т.д. читайте прато
     struct player conecntion;        // Создаём объект класса нашего пользователя, в котором всё будет храниться. Позже мы будем этот объект сохранять и вызывать в будущем

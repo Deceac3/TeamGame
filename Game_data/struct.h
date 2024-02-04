@@ -3,12 +3,26 @@ struct effects
     int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
 };
 
-struct specialItem
+/*
+Предметы будет содержать интовое значение типа.
+1) Обычный лут, выпадающий с монстров, с случайных событий и т.д.
+2) квестовый особый лут, который нельзя продать, передать удалить и т.д. 
+*/
+struct GameItem
 {
     char* itemName;
     int itemCode;
     int itemCost;
 };
+
+/*
+Зелья будут разделяться на некоторые типы:
+Зелья типа 1 - лечащие, востанавливают хп
+зелья типа 2 - защитные, увеличивают броню
+зелья типа 3,4,5 - увеличивают статы интелект, ловкость и силу.
+зелья типа 6 - повышают скорость
+зулья типа 7 - повышают удачу
+*/
 
 struct potion
 {
@@ -70,33 +84,35 @@ struct enemy
     int moneyOut;
     int speed;
     int rangeAtack;
-    struct specialItem specialItem;
+    struct GameItem GameItem;
     struct effects enemyEffects;
 };
 
 struct playerPotionsBag
 {
-    int healingFlaskCount,stoneSkinCount,magicEssenceCount,agilSkilsCount,strongEssenceCount,speedEssenceCount,luckEssenceCount;
     struct potion healingFlask,stoneSkin,magicEssence,agilSkils,strongEssence,speedEssence,luckEssence;
+    int healingFlaskCount,stoneSkinCount,magicEssenceCount,agilSkilsCount,strongEssenceCount,speedEssenceCount,luckEssenceCount;
 };
 
 struct player 
 {
-    _Bool player_alive;
+    struct playerPotionsBag playerPotionsBag;
+    struct effects playerEffects;
+    struct weapon playerWeapon;
+    struct armor PlayerArmor;
     char playerName[20];
     int playerHP,playerMaxHp, playerClass, playerMind, playerStrong, playerAgil, playerMoney, playerLvl, playerLvlExp,playerLvlExpNext, playerStage,playerLuck,playerSpeed,PlayerPassiveArmor;
-    struct armor PlayerArmor;
-    struct weapon playerWeapon;
-    struct effects playerEffects;
-    struct playerPotionsBag playerPotionsBag;
+    _Bool player_alive;
 };
 
-/*
-Зелья будут разделяться на некоторые типы:
-Зелья типа 1 - лечащие, востанавливают хп
-зелья типа 2 - защитные, увеличивают броню
-зелья типа 3,4,5 - увеличивают статы интелект, ловкость и силу.
-зелья типа 6 - повышают скорость
-зулья типа 7 - повышают удачу
-*/
+struct QestTypeCollect
+{
+    struct GameItem GameItem;
+    int ItemCounts;
+};
 
+struct QestTypeConvey
+{
+    struct GameItem GameItem;
+    int ItemInterpos;
+};
