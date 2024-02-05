@@ -69,7 +69,7 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
     switch (choose)
     {
     case 1:
-        printf("Принеси мне 5 алых огненных цветка из пещеры забвения и я дам тебе священный амулет\n");//дай инвентарь
+        herbalistqest(conection);
         return true;
         break;
     case 2:

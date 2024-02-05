@@ -373,5 +373,5 @@ void EndGame(time_t begin){
     time_t end,razn;
     end=time(NULL); 
     razn = end-begin;
-    printf("Вы провели в игре %dч:%dм:%dс\n",(razn/60/60),(razn/60),razn);
+    printf("Вы провели в игре %dч:%dм:%dс\n",(razn/60/60),(razn/60)%60,razn%60);
 }

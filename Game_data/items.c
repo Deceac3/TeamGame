@@ -17,6 +17,7 @@ struct GameItem wolfSkin = {"Волчья шкура",1,5};
 struct GameItem bearSkin = {"Медвежья шкура",1, 10};
 struct GameItem theMonkeyBar = {"Посох макакаки",1, 90};
 struct GameItem flowerOfRestoration = {"Цветок востановления",1,6};
+struct GameItem OvnerTavernLatter ={"Письмо в другой город",2,0};
 
 /*
 Это базовый пак зелек  
