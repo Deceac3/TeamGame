@@ -104,15 +104,9 @@ struct player
     int playerHP,playerMaxHp, playerClass, playerMind, playerStrong, playerAgil, playerMoney, playerLvl, playerLvlExp,playerLvlExpNext, playerStage,playerLuck,playerSpeed,PlayerPassiveArmor;
     _Bool player_alive;
 };
-
+//структура квеста, в котором нужно принести определённое количество определённого предмета в неё так же входят задания с письмами и т.д.
 struct QestTypeCollect
 {
     struct GameItem GameItem;
     int ItemCounts;
-};
-
-struct QestTypeConvey
-{
-    struct GameItem GameItem;
-    int ItemInterpos;
 };
