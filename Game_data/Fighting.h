@@ -27,9 +27,13 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
     switch (chose)
     {
     case 1:
+        if(*rangeuk>1){
         *rangeuk =*rangeuk-1;
-        printf("Вы делаете шаг вперёд. Растояние между вами %d\n",*rangeuk);
         return false;
+        }
+        else{
+            printf("Вы не можете сделать шаг вперёд. Расстояние между вами и противником %D!",*rangeuk);
+        }
         break;
     case 2:
         if(*rangeuk>conection->playerWeapon.range){
@@ -100,10 +104,20 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
         {
         case 1:
             if(range>conection->playerWeapon.range){
+                if (range >1){
                 printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                }
+                else{
+                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                }
             }
             else{
+                if (range>1){
                 printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                }
+                else{
+                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                }
             }
             _Bool chek=true;
             while(chek){
@@ -144,7 +158,7 @@ void damageTaken(struct player* conection, struct enemy* enemy){
         printf("Вы получили %d урона. У вас осталос %d|%d здоровья\n",damage,conection->playerHP, conection->playerMaxHp);
         if(PlayerHealth(conection->playerHP)){
             printf("Вы погибли! игра окончена!\n");
-            exit(1);
+            conection->player_alive=false;
         }
     }
 }
