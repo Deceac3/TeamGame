@@ -7,10 +7,10 @@ struct weapon WizardStaff ={"Посох грома",5,1,50,0,1.4};
 struct weapon hands = {"Руки",1,2,0,-1,1};     //   Базовое оружие любого персонажа у которого нет оружия
 
 struct armor rags = {"rags", 3,5,0};  // Базовая броня вора
-struct armor HiddenChainmail ={"Броня со скрытой кольчугой", 5,15,0};
 struct armor armour = {"Броня", 6,20,0};  // Базова броня танка
-struct armor MehaArmor = {"Механическая броня",8,30,0};
 struct armor robe = {"Роба", 2,6,0};    // Базовая броня мага
+struct armor HiddenChainmail ={"Броня со скрытой кольчугой", 5,15,0};
+struct armor MehaArmor = {"Механическая броня",8,30,0};
 struct armor cultRobe = {"Роба культиста",4,10,0};
 
 struct GameItem wolfSkin = {"Волчья шкура",1,5};
@@ -59,3 +59,4 @@ void PreLoader(struct enemy* EnemysArray){
     EnemysArray[1]=bear;
     EnemysArray[2]=monkey;
 }
+time_t begin;
