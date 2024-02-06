@@ -1,5 +1,4 @@
-#include "struct.h"
-#include "items.c"
+#include "FilesData.h"
 
 //Квесты Кузнеца
 int blacksmithQestCount=1;
@@ -56,6 +55,40 @@ int magicianQestCounter = 1;
 // Квесты владельца таверны
 int ovnerTavernQestCounter = 1;
 struct QestTypeCollect ovnerTavernLatterQ={.ItemCounts=0};
+int hchose;
+_Bool cheker = true;
+void ovnerTavernQests(struct player* conection){
+    switch (ovnerTavernQestCounter)
+    {
+    case 1:
+        printf("У меня есть задание для тебя. Мне нужно доставить это письмо моему другу из другого города. Доставишь это письмо и возвращайся ко мне с его ответом, за это я тебе заплачу и угощу своим пивом.\n");
+        while(cheker){
+            printf("Принёс отнёс письмо?\n1)да\n2)нет\n");
+            hchose=IntPlayerChoose();
+            switch (hchose)
+            {
+            case 1:
+                printf("Спасибо друг, вот тебе небольшое вознаграждение. Приходи на следующий день, может появятся новые задания\n");
+                cheker=false;
+                ovnerTavernQestCounter++;
+                conection->playerMoney+=10;
+                break;
+            case 2:
+                printf("НУ ТАК ХУЛИ ТЫ СТОИШЬ, ПИЗДУЙ\n");
+                cheker=false;
+                break;
+            default:
+                printf("Вы ввели неверный номер опции.\n");
+                break;
+            }
+        }
+        break;
+    
+    default:
+        printf("У меня нет больше заданий, приходи позже.\n");
+        break;
+    }
+}
 
 
 //подругрзка квестовых предметов через функцию

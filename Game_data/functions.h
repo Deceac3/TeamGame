@@ -9,7 +9,7 @@ void createHero(struct player* conection){
     int hchose; 
     _Bool cheker,cheker2;
     printf("\nПриветствую тебя путешественник? Как тебя зовут?\n");
-    scanf("%s\0\n", &conection->playerName);
+    scanf("%s\n", conection->playerName);
     printf("Привет %s! Какой класс ты выберешь?\n1)маг\n2)вор\n3)Танк\n",conection->playerName);
     cheker = true;
     while(cheker){
@@ -62,7 +62,7 @@ void createHero(struct player* conection){
             printf("Сколько очков вы бы хотели вложить в интелект? свободных очков у вас: 15/15 \n");
             while(cheker){
             hchose = IntPlayerChoose();
-            if(hchose <= 15 & hchose >= 0){
+            if((hchose <= 15) & (hchose >= 0)){
                 conection->playerMind += hchose;
                 freexp = freexp-hchose;
                 cheker = false;
@@ -77,7 +77,7 @@ void createHero(struct player* conection){
                 printf("Сколько очков вы бы хотели вложить в силу?\n");
                 while(cheker){
                 hchose =IntPlayerChoose();
-                if(hchose <= freexp & hchose >=0){
+                if((hchose <= freexp) & (hchose >=0)){
                     conection->playerStrong += hchose;
                     freexp = freexp - hchose;
                     cheker = false;
@@ -139,7 +139,10 @@ int IntPlayerChoose(){
     char buf[80];
     int x;
     scanf("%d", &x);
-    if (fgets(buf, sizeof buf, stdin))return x;
+    if (fgets(buf, sizeof buf, stdin)){return x;}
+    else{
+        return 0;
+    }
 };
 
 void LvlExperienceUp(struct player* conection){
@@ -225,7 +228,7 @@ void LvlStatsUp(struct player* conection){
     }
 }
 
-void TrevelLobby(int hchose, int* cheker,struct player* conection){
+void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
     switch (hchose)
     {
     case 1:
@@ -289,7 +292,6 @@ void gameSelectMenu(struct player* conecntion){
         printf("TOWN 2");
         printf("Программа окончена! %s\n", conecntion->playerName);
         break;
-        return 0;
     default:
         break;
 }
@@ -373,5 +375,5 @@ void EndGame(time_t begin){
     time_t end,razn;
     end=time(NULL); 
     razn = end-begin;
-    printf("Вы провели в игре %dч:%dм:%dс\n",(razn/60/60),(razn/60)%60,razn%60);
+    printf("Вы провели в игре %ldч:%ldм:%ldс\n",(razn/60/60),(razn/60)%60,razn%60);
 }

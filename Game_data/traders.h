@@ -58,6 +58,8 @@ _Bool blacksmith(struct player* conection,int choose){
         return false;
         break;
     default:
+        printf("Вы ввели неверный номер опции\n");
+        return true;
         break;
     }
 }

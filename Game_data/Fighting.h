@@ -32,7 +32,8 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
         return false;
         }
         else{
-            printf("Вы не можете сделать шаг вперёд. Расстояние между вами и противником %D!",*rangeuk);
+            printf("Вы не можете сделать шаг вперёд. Расстояние между вами и противником %d!\n",*rangeuk);
+            return true;
         }
         break;
     case 2:
@@ -61,6 +62,7 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
         return false;
     default:
         printf("Вы выбрали несуществующее действие, попробуйте снова\n");
+        return true;
         break;
     }
 }
@@ -85,7 +87,7 @@ void fightInRandomTrevel(struct player* conection,int enemy){
     struct enemy NextEnemy;
     NextEnemy=EnemysArray[enemy-1];
     enemyMooveSpeed=NextEnemy.speed;
-    Batle(conection,enemyMooveSpeed,&NextEnemy);
+    Batle(conection,&enemyMooveSpeed,&NextEnemy);
     conection->playerLvlExp += NextEnemy.expOut;
     conection->playerLvlExp += NextEnemy.moneyOut;
     printf("Вам удалось победить противника!\n");
@@ -100,7 +102,7 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
         system("clear");
         printf("Вы %d|%d hp            %s %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->enemyName,enemy->hp);
         printf("расстояние %d метров\n", range);
-        switch (nextStep(conection,enemy,&shortplayerspeed, &enemyMooveSpeed))
+        switch (nextStep(conection,enemy,&shortplayerspeed, enemyMooveSpeed))
         {
         case 1:
             if(range>conection->playerWeapon.range){
@@ -197,6 +199,7 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
             break;
         
         default:
+            return NULL;
             break;
         }
     }
@@ -215,6 +218,7 @@ int WeaponDamage(struct player* conection){
         return conection->playerAgil*conection->playerWeapon.damage;
         break;
     default:
+        return NULL;
         break;
     }
 }

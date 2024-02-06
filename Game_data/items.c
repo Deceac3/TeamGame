@@ -41,8 +41,10 @@ struct enemy monkey = {"Макака",20,6,3,20,4,40,2};
 struct class mag = {1,50,1,2,3,2,4,50,2};
 struct class theif = {2,70,2,6,1,3,3,30,10};
 struct class tank = {3,100,4,2,1,4,1,40,7};
+
 struct enemy* EnemysArray;
 int EnemysCount=3;      //Хочешь сделать больше противников? Добавь +1 к этому счётчику.
+
 void PreLoader(struct enemy* EnemysArray){
     //снизу представленна запись оружия и брони в структуры классов
     mag.classWeapon = staff;
