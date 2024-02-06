@@ -199,7 +199,7 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
             break;
         
         default:
-            return NULL;
+            return 0;
             break;
         }
     }
@@ -218,7 +218,7 @@ int WeaponDamage(struct player* conection){
         return conection->playerAgil*conection->playerWeapon.damage;
         break;
     default:
-        return NULL;
+        return 0;
         break;
     }
 }

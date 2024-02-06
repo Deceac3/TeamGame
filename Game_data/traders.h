@@ -66,8 +66,6 @@ _Bool blacksmith(struct player* conection,int choose){
 
 //  Травница. Продаёт зелья хила, силы, ловкости и т.д. Даёт разные сайт квесты и может исцелить игрока.
 _Bool herbalist(struct player* conection,int choose){//АААААААААААААААААААААААААААААААА ЖЕНЩИНА АААААААААААААА
-    _Bool cheker=true;
-    int hchosed;
     switch (choose)
     {
     case 1:
@@ -83,6 +81,7 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
         //я не шучу
         break;
     case 4:
+        int hchosed;
         printf("Я могу сварить для тебя настойку на травах, которая снимет все негативные эффекты и полностью исцелит тебя всего за 10 монет\n");
         if(conection->playerMoney>10 || conection->playerHP == conection->playerMaxHp){
             printf("1)Восстановить здоровье?\n2)Bruh\n");
@@ -105,8 +104,6 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
 
 //  Это колдун. он может улучшить магическое оружие или броню.
 _Bool magician(struct player* conection, int choose){
-    _Bool cheker;
-    int hchosed;
     switch (choose)
     {
     case 1:
@@ -122,6 +119,7 @@ _Bool magician(struct player* conection, int choose){
         //я не шучу
         break;
     case 4:
+        int hchosed;
         printf("Я могу сделать твоё магическое оружие ещё сильнее всего за 30 монет!\n");
         if(conection->playerMoney>30){
             if(conection->playerWeapon.type == 1){
@@ -162,8 +160,6 @@ _Bool magician(struct player* conection, int choose){
 
 //Квестовый герой, дающий задания, продающий усиливающее пыво
 _Bool ovnerTavern(struct player* conection,int choose){
-    _Bool cheker;
-    int hchosed;
     switch (choose)
     {
     case 1:
@@ -179,6 +175,7 @@ _Bool ovnerTavern(struct player* conection,int choose){
         //я не шучу
         break;
     case 4:
+        int hchosed;
         printf("Я варю лучшее пиво в округе! 1 кружка стоит 10 монет.\n");
         if(conection->playerMoney>=10){
             if(conection->playerWeapon.type == 1){
@@ -253,7 +250,6 @@ void tradersMT(struct player* conection){
 //Выбор трейдеров изходя из города и выбора героя.
 void traderSelector(struct player* conection, int hchose){
     _Bool tradersBool=true,cheker=true;
-    int hchosed;
     switch (conection->playerStage)
     {
     case 1:
