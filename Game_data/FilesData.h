@@ -1,6 +1,10 @@
 #include "struct.h"
 #include "items.c"
-
+/*
+Во прикол. Все функции после их создания помещайте сюда. Так проще будет отслеживать, что где лежит и позволит вам распологать функции 
+в коде так, как вам хочется, иначе такие функции как: floar, _Bool или другого вида (не void\int функци) будут автоматом записываться
+в виде int функций.
+*/
 _Bool blacksmith(struct player*,int);
 _Bool herbalist(struct player*,int);
 _Bool magician(struct player*, int);

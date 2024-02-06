@@ -9,7 +9,7 @@ void createHero(struct player* conection){
     int hchose; 
     _Bool cheker,cheker2;
     printf("\nПриветствую тебя путешественник? Как тебя зовут?\n");
-    scanf("%s\n", conection->playerName);
+    scanf("%s\0\n", conection->playerName);
     printf("Привет %s! Какой класс ты выберешь?\n1)маг\n2)вор\n3)Танк\n",conection->playerName);
     cheker = true;
     while(cheker){

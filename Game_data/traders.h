@@ -73,7 +73,17 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
         return true;
         break;
     case 2:
-        return true;
+        printf("У меня есть зелья любого вида.");
+        switch (conection->playerLvl)
+        {
+        case 1:
+            
+            break;
+        
+        default:
+            break;
+        }
+        return false;
         //где инвентарь, лебовский?
         break;
     case 3:
@@ -163,12 +173,13 @@ _Bool ovnerTavern(struct player* conection,int choose){
     switch (choose)
     {
     case 1:
-        printf("Вот, возьми это письмо и доставь его в столицу трактирщику Нэду, как отдашь принеси его ответ, за это я тебя отблагодарю!\n");//дай инвентарь
+        ovnerTavernQests(conection);
         return false;
         break;
     case 2:
         return true;
-        //где инвентарь, лебовский?
+        
+        //где инвентарь, лебовский? Я могу сдать тебе в аренду одну из моих комнат
         break;
     case 3:
         return true;

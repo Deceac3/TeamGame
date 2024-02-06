@@ -9,65 +9,6 @@
 */
 
 
-float arrmorK(int armor){
-    float k = 0.12;
-    return (1-(k*armor/(1+k*abs(armor))));
-}
-
-_Bool PlayerHealth(int helth){
-    if(helth<=0){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-_Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* rangeuk){
-    switch (chose)
-    {
-    case 1:
-        if(*rangeuk>1){
-        *rangeuk =*rangeuk-1;
-        return false;
-        }
-        else{
-            printf("Вы не можете сделать шаг вперёд. Расстояние между вами и противником %d!\n",*rangeuk);
-            return true;
-        }
-        break;
-    case 2:
-        if(*rangeuk>conection->playerWeapon.range){
-            printf("Вы не можете атаковать. Расстояние слишком большое. %d | %d\n", conection->playerWeapon.range, *rangeuk);
-            return true;
-        }
-        else{
-            int damage,finalDamage;
-            float armor,perdamage;
-            damage = WeaponDamage(conection);
-            perdamage = (float)damage;
-            armor = arrmorK(enemy->armor);
-            finalDamage = (int)(perdamage*armor);
-            enemy->hp=enemy->hp - (finalDamage);
-            printf("Вы атакуете врага и наносите ему урона %d\nздоровье противника %d\n", finalDamage,enemy->hp);
-            return false;
-        }
-        break;
-    case 3:
-        *rangeuk=*rangeuk+1;
-        printf("Вы делаете шаг назад. Расстояние между вами %d\n",*rangeuk);
-        return false;
-        break;
-    case 4:
-        return false;
-    default:
-        printf("Вы выбрали несуществующее действие, попробуйте снова\n");
-        return true;
-        break;
-    }
-}
-
-
 void RandomTrevelForTresure(struct player* conection){
     int enemys,enemyFighter;         // В бета версии будет пока что так. Енемис это рандомное количество противников в одном путешествии. Каждый противник будет выбираться рандомно каждый заход.
     enemys = rand()%6+2;      // от 2 до 8 противников будет выпадать. За каждую победу над противником будет выдаваться опыт и рандомная награда, такая ка деньги или особый предмет.
@@ -88,17 +29,13 @@ void fightInRandomTrevel(struct player* conection,int enemy){
     NextEnemy=EnemysArray[enemy-1];
     enemyMooveSpeed=NextEnemy.speed;
     Batle(conection,&enemyMooveSpeed,&NextEnemy);
-    conection->playerLvlExp += NextEnemy.expOut;
-    conection->playerLvlExp += NextEnemy.moneyOut;
-    printf("Вам удалось победить противника!\n");
-    LvlExperienceUp(conection);
 }
 
 void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     int playerMooveSpeed=conection->playerSpeed, range=4,playerchoose, shortplayerspeed = conection->playerSpeed;
     printf("В ходе вашего путешествия перед вами появляется %s\nБитва началась!\n", enemy->enemyName);
     while(enemy->hp>0 && conection->playerHP>0){
-        sleep(3);
+        sleep(2);
         system("clear");
         printf("Вы %d|%d hp            %s %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->enemyName,enemy->hp);
         printf("расстояние %d метров\n", range);
@@ -140,6 +77,65 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
         default:
             break;
         }
+    if(enemy->hp<=0){
+        conection->playerLvlExp += enemy->expOut;
+        conection->playerLvlExp += enemy->moneyOut;
+        printf("Вам удалось победить %s!\n", enemy->enemyName);
+        LvlExperienceUp(conection);
+    }
+    }
+}
+
+_Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* rangeuk){
+    switch (chose)
+    {
+    case 1:
+        if(*rangeuk>1){
+        *rangeuk =*rangeuk-1;
+        return false;
+        }
+        else{
+            printf("Вы не можете сделать шаг вперёд. Расстояние между вами и противником %d!\n",*rangeuk);
+            return true;
+        }
+        break;
+    case 2:
+        if(*rangeuk>conection->playerWeapon.range){
+            printf("Вы не можете атаковать. Расстояние слишком большое. %d | %d\n", conection->playerWeapon.range, *rangeuk);
+            return true;
+        }
+        else{
+            int chance,enemyAgil =3, randCh = rand()%100;
+            chance = missChance(enemyAgil);
+            printf("%d %d", randCh,chance);
+            if(randCh>chance){
+                int damage,finalDamage;
+                float armor,perdamage;
+                damage = WeaponDamage(conection);
+                perdamage = (float)damage;
+                armor = arrmorK(enemy->armor);
+                finalDamage = (int)(perdamage*armor);
+                enemy->hp=enemy->hp - (finalDamage);
+                printf("Вы атакуете врага и наносите ему урона %d\nздоровье противника %d\n", finalDamage,enemy->hp);
+                return false;
+            }
+            else{
+                printf("Вы промахнулись.\n");
+                return false;
+            }
+        }
+        break;
+    case 3:
+        *rangeuk=*rangeuk+1;
+        printf("Вы делаете шаг назад. Расстояние между вами %d\n",*rangeuk);
+        return false;
+        break;
+    case 4:
+        return false;
+    default:
+        printf("Вы выбрали несуществующее действие, попробуйте снова\n");
+        return true;
+        break;
     }
 }
 
@@ -163,11 +159,6 @@ void damageTaken(struct player* conection, struct enemy* enemy){
             conection->player_alive=false;
         }
     }
-}
-
-int missChance(int agil){
-    float k = 0.07;
-    return (k*agil/(1+k*abs(agil))*100);
 }
 
 int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int* enemyspeed){
@@ -229,4 +220,23 @@ int DiceNumb(int Numb){
     result = rand()%Numb;
     printf("Вы бросаете кость d%d. Вам выпадает %d\n", Numb, result);
     return result;
+}
+
+int missChance(int agil){
+    float k = 0.07;
+    return (k*agil/(1+k*abs(agil))*100);
+}
+
+float arrmorK(int armor){
+    float k = 0.12;
+    return (1-(k*armor/(1+k*abs(armor))));
+}
+
+_Bool PlayerHealth(int helth){
+    if(helth<=0){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
