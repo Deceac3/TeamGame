@@ -11,7 +11,7 @@ _Bool magician(struct player*, int);
 _Bool ovnerTavern(struct player*,int);
 _Bool PlayerHealth(int);
 _Bool batlemoove(struct player*, struct enemy*, int, int*);
-_Bool potionBagUse(int, struct player*);
+_Bool potionBagUse(int, struct player*, _Bool*);
 
 float arrmorK(int);
 
@@ -46,3 +46,11 @@ void WeaponItemInfo(struct weapon);
 void EndGame(time_t);
 void potionInfo(struct playerPotionsBag);
 void potionChekInfo(struct potion, int);
+void healingFlaskEffect(struct player*);
+void stoneSkinEffect(struct player*);
+void magicEssenceEffect(struct player*);
+void agilEffect(struct player*);
+void strongEffect(struct player*);
+void speedEffect(struct player*);
+void luckEffect(struct player*);
+void textNextMoove(int,struct player*);

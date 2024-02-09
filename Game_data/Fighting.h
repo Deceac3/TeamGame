@@ -42,22 +42,7 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
         switch (nextStep(conection,enemy,&shortplayerspeed, enemyMooveSpeed))
         {
         case 1:
-            if(range>conection->playerWeapon.range){
-                if (range >1){
-                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
-                }
-                else{
-                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
-                }
-            }
-            else{
-                if (range>1){
-                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
-                }
-                else{
-                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
-                }
-            }
+            textNextMoove(range,conection);
             _Bool chek=true;
             while(chek){
                 playerchoose = IntPlayerChoose();
@@ -135,6 +120,7 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
         potionBagUseInfo(conection->playerPotionsBag,&count);
         if(count >=1){
             _Bool cheker;
+            _Bool NotUsed=false;
             int hchose;
             printf("Какое зелье вы бы хотели использовать?\n0)Если не использовать зелье\n");
             while (cheker)
@@ -143,14 +129,25 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
                 switch (hchose)
                 {
                 case 0:
+                    NotUsed= true;
                     cheker=false;
                     break;
                 case (1||2||3||4||5||6||7):
-                    cheker = potionBagUse(hchose,conection);
+                    cheker = potionBagUse(hchose,conection,&NotUsed);
                     break;
                 default:
                     printf("Вы ввели номер несуществующего зелья\n");
                     break;
+                }
+            }
+            printf("%d\n",NotUsed);
+            if(NotUsed){
+                _Bool shek = true;
+                while (shek)
+                {
+                    textNextMoove(&rangeuk,conection);
+                    hchose = IntPlayerChoose();
+                    shek = batlemoove(conection,enemy,hchose,&rangeuk);
                 }
             }
             return false;
@@ -170,27 +167,7 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
     }
 }
 
-void damageTaken(struct player* conection, struct enemy* enemy){
-    int chance;
-    int randCh = rand()%100;
-    chance = missChance(conection->playerAgil);
-    if(randCh<chance){
-        printf("Противник промахнулся\n");
-    }
-    else{
-        printf("Противник попал по вам\n");
-        int damage;
-        float armor;
-        armor = arrmorK(conection->PlayerPassiveArmor+ conection->PlayerArmor.defence);
-        damage = enemy->damage*armor;
-        conection->playerHP -= damage;
-        printf("Вы получили %d урона. У вас осталос %d|%d здоровья\n",damage,conection->playerHP, conection->playerMaxHp);
-        if(PlayerHealth(conection->playerHP)){
-            printf("Вы погибли! игра окончена!\n");
-            conection->player_alive=false;
-        }
-    }
-}
+
 
 int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int* enemyspeed){
     int x;
@@ -226,6 +203,30 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
         }
     }
 }
+
+void textNextMoove(int range,struct player* conection){
+    if(range>conection->playerWeapon.range){
+                if (range >1){
+                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
+                }
+                else{
+                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
+                }
+            }
+            else{
+                if (range>1){
+                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
+                }
+                else{
+                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
+                }
+            }
+}
+
+/*
+ПОСЛЕ ЭТОЙ СТРОЧКИ НИЧЕГО МЕНЯТЬ НЕ НАДО. ТАМ ЛЕЖАТЬ ФУНКЦИИ ВЛЯЮЩИЕ НА ЧТО-ТО, 
+ОНИ НЕ МЕНЯЮТ МОДЕЛЬ ФАЙТИНГА, А РАСЧИТЫВАЮТ ЗНАЧЕНИЯ И ЭФФЕКТЫ
+*/
 
 int WeaponDamage(struct player* conection){
     switch (conection->playerWeapon.type)
@@ -266,7 +267,7 @@ void potionBagUseInfo(struct playerPotionsBag pack,int* count){
 
 int potionBagChek(struct potion potion, int count,int i){
     if(count!=0){
-        printf("%d) %s: %d\n",i,potion.potionName,count);
+        printf("%d) %s: %d\n",i+1,potion.potionName,count);
         return 1;
     }
     else{
@@ -274,18 +275,20 @@ int potionBagChek(struct potion potion, int count,int i){
     }
 }
 
-_Bool potionBagUse(int hchose, struct player* conection){
+_Bool potionBagUse(int hchose, struct player* conection,_Bool* NotUsed){
     _Bool cheker=true;
     switch (hchose)
     {
     case 1:     //Зелье исцеления
         if(conection->playerPotionsBag.healingFlaskCount>=1){
             if(conection->playerHP<conection->playerMaxHp){
+                healingFlaskEffect(conection);
                 printf("Вы исцелили %d здоровья!\n", conection->playerMaxHp-conection->playerHP);
                 return false;
             }
             else{
                 printf("Ваше здоровье полное, незачем использовать зелье\n");
+                *NotUsed= true;
                 return false;
             }
         }
@@ -294,12 +297,116 @@ _Bool potionBagUse(int hchose, struct player* conection){
             return true;
         }
         break;
-    
+    case 2:
+        if (conection->playerPotionsBag.stoneSkinCount>=1)
+        {
+            stoneSkinEffect(conection);
+            return false;
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
+    case 3:
+        if (conection->playerPotionsBag.magicEssenceCount>=1)
+        {
+            magicEssenceEffect(conection);
+            return false;
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
+    case 4:
+        if (conection->playerPotionsBag.agilSkilsCount>=1)
+        {
+            agilEffect(conection);
+            return false;
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
+    case 5:
+        if (conection->playerPotionsBag.strongEssenceCount>=1)
+        {
+            strongEffect(conection);
+            return false;
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
+    case 6:
+        if (conection->playerPotionsBag.speedEssenceCount>=1)
+        {
+            speedEffect(conection);
+            return false;
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
+    case 7:
+    if (conection->playerPotionsBag.agilSkilsCount>=1)
+        {
+            luckEffect(conection);
+            return false;
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
     default:
         printf("Вы выбрали неверный номер зелья, попробуйте снова\n");
         return true;
         break;
     }
+}
+
+/*Тут собраны все эффекты зелий в виде функций их воздействия на игрока*/
+
+void healingFlaskEffect(struct player*conecntion){
+    conecntion->playerPotionsBag.healingFlaskCount--;
+    conecntion->playerHP+= conecntion->playerPotionsBag.healingFlask.potionValue;
+    if(conecntion->playerHP>conecntion->playerMaxHp){
+        conecntion->playerHP=conecntion->playerMaxHp;
+    }
+}
+
+void stoneSkinEffect(struct player* conection){
+    conection->playerPotionsBag.stoneSkinCount--;
+    conection->playerEffects.armourChanges+=conection->playerPotionsBag.stoneSkin.potionValue;
+}
+
+void magicEssenceEffect(struct player* conection){
+    conection->playerPotionsBag.magicEssenceCount--;
+    conection->playerEffects.mindChanges+= conection->playerPotionsBag.magicEssence.potionValue;
+}
+
+void agilEffect(struct player* conection){
+    conection->playerPotionsBag.agilSkilsCount--;
+    conection->playerEffects.agilChanges+=conection->playerPotionsBag.agilSkils.potionValue;
+}
+
+void strongEffect(struct player* conection){
+    conection->playerPotionsBag.strongEssenceCount--;
+    conection->playerEffects.strongChanges+=conection->playerPotionsBag.strongEssence.potionValue;
+}
+
+void speedEffect(struct player* conection){
+    conection->playerPotionsBag.speedEssenceCount--;
+    conection->playerEffects.speedChanges+=conection->playerPotionsBag.speedEssence.potionValue;
+}
+void luckEffect(struct player* conection){
+    conection->playerPotionsBag.luckEssenceCount--;
+    conection->playerEffects.speedChanges+=conection->playerPotionsBag.speedEssence.potionValue;
 }
 
 float arrmorK(int armor){
@@ -313,5 +420,27 @@ _Bool PlayerHealth(int helth){
     }
     else{
         return false;
+    }
+}
+
+void damageTaken(struct player* conection, struct enemy* enemy){
+    int chance;
+    int randCh = rand()%100;
+    chance = missChance(conection->playerAgil);
+    if(randCh<chance){
+        printf("Противник промахнулся\n");
+    }
+    else{
+        printf("Противник попал по вам\n");
+        int damage;
+        float armor;
+        armor = arrmorK(conection->PlayerPassiveArmor+ conection->PlayerArmor.defence);
+        damage = enemy->damage*armor;
+        conection->playerHP -= damage;
+        printf("Вы получили %d урона. У вас осталос %d|%d здоровья\n",damage,conection->playerHP, conection->playerMaxHp);
+        if(PlayerHealth(conection->playerHP)){
+            printf("Вы погибли! игра окончена!\n");
+            conection->player_alive=false;
+        }
     }
 }
