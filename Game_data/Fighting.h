@@ -44,18 +44,18 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
         case 1:
             if(range>conection->playerWeapon.range){
                 if (range >1){
-                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
                 }
                 else{
-                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
                 }
             }
             else{
                 if (range>1){
-                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
                 }
                 else{
-                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Злобно стоять на месте\n");
+                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n2)Атаковать противника вашим оружием\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
                 }
             }
             _Bool chek=true;
@@ -131,7 +131,38 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
         return false;
         break;
     case 4:
+        int count;
+        potionBagUseInfo(conection->playerPotionsBag,&count);
+        if(count >=1){
+            _Bool cheker;
+            int hchose;
+            printf("Какое зелье вы бы хотели использовать?\n0)Если не использовать зелье\n");
+            while (cheker)
+            {
+                hchose=IntPlayerChoose();
+                switch (hchose)
+                {
+                case 0:
+                    cheker=false;
+                    break;
+                case (1||2||3||4||5||6||7):
+                    cheker = potionBagUse(hchose,conection);
+                    break;
+                default:
+                    printf("Вы ввели номер несуществующего зелья\n");
+                    break;
+                }
+            }
+            return false;
+        }
+        else{
+            printf("У вас нет доступных зелий для использования\n");
+            return true;
+        }
+        break;
+    case 5:
         return false;
+        break;
     default:
         printf("Вы выбрали несуществующее действие, попробуйте снова\n");
         return true;
@@ -225,6 +256,50 @@ int DiceNumb(int Numb){
 int missChance(int agil){
     float k = 0.07;
     return (k*agil/(1+k*abs(agil))*100);
+}
+
+void potionBagUseInfo(struct playerPotionsBag pack,int* count){
+    for(int i=0;i<(sizeof(pack)/(sizeof(pack.agilSkils)+sizeof(int)));i++){
+        *count+=potionBagChek(*(&pack.healingFlask+i),*(&pack.healingFlaskCount+i),i);
+    }
+}
+
+int potionBagChek(struct potion potion, int count,int i){
+    if(count!=0){
+        printf("%d) %s: %d\n",i,potion.potionName,count);
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+_Bool potionBagUse(int hchose, struct player* conection){
+    _Bool cheker=true;
+    switch (hchose)
+    {
+    case 1:     //Зелье исцеления
+        if(conection->playerPotionsBag.healingFlaskCount>=1){
+            if(conection->playerHP<conection->playerMaxHp){
+                printf("Вы исцелили %d здоровья!\n", conection->playerMaxHp-conection->playerHP);
+                return false;
+            }
+            else{
+                printf("Ваше здоровье полное, незачем использовать зелье\n");
+                return false;
+            }
+        }
+        else{
+            printf("У вас не осталось зелий данного типа, попробуйте другое\n");
+            return true;
+        }
+        break;
+    
+    default:
+        printf("Вы выбрали неверный номер зелья, попробуйте снова\n");
+        return true;
+        break;
+    }
 }
 
 float arrmorK(int armor){

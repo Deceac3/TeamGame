@@ -34,6 +34,8 @@ struct potion luckEssence ={"Зелье удачи",7,2,30};
 struct effects playerEffects = {0,0,0,0,0,0,0};     //  базовый объект эффектов для игрока
 struct effects enemyEffects = {0,0,0,0,0,0,0};     //   отсутствие эффектов на противнике тоже должно записываться. Если противников будет несколько то нужно больше объектов этих структур
 
+struct playerPotionsBag prePlayerPB = {.healingFlaskCount = 1,.stoneSkinCount = 0,.magicEssenceCount=0,.agilSkilsCount=0,.strongEssenceCount=0,.speedEssenceCount=0,.luckEssenceCount=0};
+
 struct enemy wolf = {"Волк",15,4,1,20,2,35,1};
 struct enemy bear = {"Медведь",40,10,0,25,1,45,1};
 struct enemy monkey = {"Макака",20,6,3,20,4,40,2};
@@ -61,5 +63,13 @@ void PreLoader(struct enemy* EnemysArray){
     EnemysArray[0]=wolf;
     EnemysArray[1]=bear;
     EnemysArray[2]=monkey;
+    //Снизу запись всех видов зелий в портфель героя
+    prePlayerPB.healingFlask=healingFlask;
+    prePlayerPB.stoneSkin=stoneSkin;
+    prePlayerPB.magicEssence=magicEssence;
+    prePlayerPB.agilSkils=agilSkils;
+    prePlayerPB.strongEssence=strongEssence;
+    prePlayerPB.speedEssence=speedEssence;
+    prePlayerPB.luckEssence=luckEssence;
 }
 time_t begin;

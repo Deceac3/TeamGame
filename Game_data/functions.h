@@ -99,11 +99,11 @@ void createHero(struct player* conection){
     conection->playerLvl=1;
     conection->playerLvlExpNext =100;
     conection->playerEffects=playerEffects;
+    conection->playerPotionsBag=prePlayerPB;
     system("clear");    
     printf("Вы создали персонажа!\n");
     }
     info(conection);
-    printf("Переносим вас в город!\n");
     system("clear");
     conection->playerStage = 1;
     conection->player_alive = true;
@@ -128,6 +128,7 @@ void info(struct player* conection){
     }
     printf("Опыт %d/%d. Уровень %d, здоровье %d/%d, скорость в бою %d и броня %d.\n", conection->playerLvlExp,conection->playerLvlExpNext,conection->playerLvl,conection->playerHP,conection->playerMaxHp,conection->playerSpeed,conection->PlayerPassiveArmor+conection->PlayerArmor.defence);
     printf("Ваше оружие %s, ваша броня %s\n", conection->playerWeapon.name,conection->PlayerArmor.name);
+    potionInfo(conection->playerPotionsBag);
     scanf("%c",&xxx);
 };
 
@@ -376,4 +377,17 @@ void EndGame(time_t begin){
     end=time(NULL); 
     razn = end-begin;
     printf("Вы провели в игре %ldч:%ldм:%ldс\n",(razn/60/60),(razn/60)%60,razn%60);
+}
+
+void potionInfo(struct playerPotionsBag pack){
+    printf("Ваши зелья:\n");
+    for(int i=0;i<(sizeof(pack)/(sizeof(pack.agilSkils)+sizeof(int)));i++){
+        potionChekInfo(*(&pack.healingFlask+i),*(&pack.healingFlaskCount+i));
+    }
+}
+
+void potionChekInfo(struct potion potion, int count){
+    if(count!=0){
+        printf("%s: %d\n",potion.potionName,count);
+    }
 }
