@@ -145,9 +145,9 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
                 _Bool shek = true;
                 while (shek)
                 {
-                    textNextMoove(&rangeuk,conection);
+                    textNextMoove(*rangeuk,conection);
                     hchose = IntPlayerChoose();
-                    shek = batlemoove(conection,enemy,hchose,&rangeuk);
+                    shek = batlemoove(conection,enemy,hchose,*rangeuk);
                 }
             }
             return false;
