@@ -9,13 +9,16 @@
 */
 
 
-void RandomTrevelForTresure(struct player* conection){
+void RandomTrevelForTresure(struct player* conection, int time_main){
+    int time_spand;
+    time_spand = rand()%4+1;
+    time_main+=time_spand;
     int enemys,enemyFighter;         // В бета версии будет пока что так. Енемис это рандомное количество противников в одном путешествии. Каждый противник будет выбираться рандомно каждый заход.
     enemys = rand()%6+2;      // от 2 до 8 противников будет выпадать. За каждую победу над противником будет выдаваться опыт и рандомная награда, такая ка деньги или особый предмет.
     for(int i = 0; i<=enemys; i++){
         if(conection->player_alive){
             enemyFighter = rand()%3+1;
-            fightInRandomTrevel(conection, enemyFighter);
+            fightInRandomTrevel(conection, enemyFighter, time_main);
         }   
         else{
             break;
@@ -23,20 +26,19 @@ void RandomTrevelForTresure(struct player* conection){
     }
 }
 
-void fightInRandomTrevel(struct player* conection,int enemy){
+void fightInRandomTrevel(struct player* conection,int enemy, int time_main){
     int enemyMooveSpeed;
     struct enemy NextEnemy;
     NextEnemy=EnemysArray[enemy-1];
     enemyMooveSpeed=NextEnemy.speed;
-    Batle(conection,&enemyMooveSpeed,&NextEnemy);
+    Batle(conection,&enemyMooveSpeed,&NextEnemy, time_main);
 }
 
-void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
+void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy, int time_main){
     int playerMooveSpeed=conection->playerSpeed-conection->playerEffects.speedChanges, range=4,playerchoose, shortplayerspeed = conection->playerSpeed-conection->playerEffects.speedChanges;
-    printf("В ходе вашего путешествия перед вами появляется %s\nБитва началась!\n", enemy->enemyName);
+    printf("Вот уже %d час(а/ов)... Похоже, перед вами возникла очередная преграда: %s\nБитва началась!\n", time_main, enemy->enemyName);
     while(enemy->hp>0 && conection->playerHP>0){
         sleep(2);
-        system("clear");
         printf("Вы %d|%d hp            %s %d hp\n",conection->playerHP,conection->playerMaxHp,enemy->enemyName,enemy->hp);
         printf("расстояние %d метров\n", range);
         switch (nextStep(conection,enemy,&shortplayerspeed, enemyMooveSpeed))

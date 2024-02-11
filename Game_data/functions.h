@@ -230,12 +230,12 @@ void LvlStatsUp(struct player* conection){
     }
 }
 
-void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
+void TrevelLobby(int hchose, _Bool* cheker,struct player* conection, int time_main){
     switch (hchose)
     {
     case 1:
         printf("%s отправляется в случайное путешествие!\n", conection->playerName);
-        RandomTrevelForTresure(conection);
+        RandomTrevelForTresure(conection, time_main);
         break;
     case 2:    
         break;
@@ -278,7 +278,7 @@ void relax(int time_now, int time_spand, struct player* conecntion)
     }
 }
 
-void gameSelectMenu(struct player* conecntion, int time){
+void gameSelectMenu(struct player* conecntion, int main_time){
     int hchose;
     _Bool cheker;
     switch (conecntion->playerStage)
@@ -295,8 +295,7 @@ void gameSelectMenu(struct player* conecntion, int time){
                     system("clear");
                     printf("Вы отправляетесь в путеществие. Куда вы пойдёте?\n1) Отправиться в путешествие ради сокровищ и золота.\n2) Отправиться в путешествию по заданию одного из нпс.\n3)Я передумал, вернуться назад.\n");
                     hchose = IntPlayerChoose();
-                    system("clear");
-                    TrevelLobby(hchose,&cheker, conecntion);
+                    TrevelLobby(hchose,&cheker, conecntion, main_time);
                     cheker = false;
                     break;
                 case 2:

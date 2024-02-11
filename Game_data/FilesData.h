@@ -25,13 +25,13 @@ int IntPlayerChoose();
 int potionBagChek(struct potion, int,int);
 
 void potionBagUseInfo(struct playerPotionsBag,int*);
-void TrevelLobby(int,_Bool*,struct player*);
+void TrevelLobby(int,_Bool*,struct player*, int);
 void LvlStatsUp(struct player*);
 void LvlExperienceUp(struct player*);
 void damageTaken(struct player*, struct enemy*);
-void Batle(struct player*,int*,struct enemy*);
-void fightInRandomTrevel(struct player*,int);
-void RandomTrevelForTresure(struct player*);
+void Batle(struct player*,int*,struct enemy*, int);
+void fightInRandomTrevel(struct player*,int, int);
+void RandomTrevelForTresure(struct player*, int);
 void herbalistqest(struct player*);
 void ovnerTavernQests(struct player*);
 void tradersMT(struct player*);
