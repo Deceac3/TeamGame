@@ -438,3 +438,18 @@ void potionChekInfo(struct potion potion, int count){
         printf("%s: %d\n",potion.potionName,count);
     }
 }
+
+void timeChanges(int change){
+    main_time+=change;
+    if(main_time>24){
+        main_time-=main_time%24;
+        dayChange(main_time/24);
+    }
+}
+
+void dayChange(int change){
+    main_day+=change;
+    if(main_day>30){
+        main_day=main_day%30;
+    }
+}

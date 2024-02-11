@@ -47,8 +47,8 @@ struct class tank = {3,100,4,2,1,4,1,40,7};
 struct enemy* EnemysArray;
 int EnemysCount=3;//Хочешь сделать больше противников? Добавь +1 к этому счётчику и запиши противника в массив. Потом будем делить их по локам
 
-int main_time;
-void PreLoader(struct enemy* EnemysArray, int* main_time){
+int main_time,main_day;
+void PreLoader(struct enemy* EnemysArray){
     //снизу представленна запись оружия и брони в структуры классов
     mag.classWeapon = staff;
     mag.classArmour = robe;
@@ -72,6 +72,7 @@ void PreLoader(struct enemy* EnemysArray, int* main_time){
     prePlayerPB.strongEssence=strongEssence;
     prePlayerPB.speedEssence=speedEssence;
     prePlayerPB.luckEssence=luckEssence;
-    *main_time=12;
+    main_time=12;
+    main_day=1;
 }
 time_t begin;

@@ -24,7 +24,7 @@ int randexpf(int);
 int IntPlayerChoose();
 int potionBagChek(struct potion, int,int);
 
-void PreLoader(struct enemy*, int*);
+void PreLoader(struct enemy*);
 void potionBagUseInfo(struct playerPotionsBag,int*);
 void TrevelLobby(int,_Bool*,struct player*);
 void LvlStatsUp(struct player*);
