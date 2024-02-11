@@ -26,5 +26,6 @@ int main(void)
         gameSelectMenu(&conecntion);
     }
     EndGame(begin);
+    printf("Вы накопили: %d очков\n",conecntion.playerScore);
     return 0;
 }

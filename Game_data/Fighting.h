@@ -65,6 +65,7 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     if(enemy->hp<=0){
         conection->playerLvlExp += enemy->expOut;
         conection->playerLvlExp += enemy->moneyOut;
+        conection->playerScore+=1;
         printf("Вам удалось победить %s!\n", enemy->enemyName);
         LvlExperienceUp(conection);
     }
@@ -206,12 +207,12 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
 
 void textNextMoove(int range,struct player* conection){
     if(range>conection->playerWeapon.range){
-                if (range >1){
+            if (range >1){
                 printf("Сейчас ваш ход что вы сделаете?\n1)Сделать шаг вперёд\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
-                }
-                else{
-                    printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
-                }
+            }
+            else{
+                printf("Сейчас ваш ход что вы сделаете?\n\e[9m1)Сделать шаг вперёд\e[m\n\e[9m2)Атаковать противника вашим оружием\e[m\n3)Сделать шаг назад\n4)Использовать зелье\n5)Злобно стоять на месте\n");
+            }
             }
             else{
                 if (range>1){

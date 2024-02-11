@@ -107,6 +107,7 @@ void createHero(struct player* conection){
     system("clear");
     conection->playerStage = 1;
     conection->player_alive = true;
+    conection->playerScore=0;
 }
 
 void info(struct player* conection){
