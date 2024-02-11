@@ -26,7 +26,7 @@ int main(void)
     while (conecntion.player_alive){
         gameSelectMenu(&conecntion, main_time);
     }
-    EndGame(begin);
+    EndGame(begin, main_time);
     printf("Вы накопили: %d очков\n",conecntion.playerScore);
     return 0;
 }

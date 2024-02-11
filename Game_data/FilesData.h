@@ -46,7 +46,7 @@ void statusEffectsPlayer(struct player*);
 void classSelector(struct player*, struct class);
 void ArmorItemInfo(struct armor);
 void WeaponItemInfo(struct weapon);
-void EndGame(time_t);
+void EndGame(time_t, int);
 void potionInfo(struct playerPotionsBag);
 void potionChekInfo(struct potion, int);
 void healingFlaskEffect(struct player*);
