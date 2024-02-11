@@ -73,22 +73,18 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
         return true;
         break;
     case 2:
-        printf("У меня есть зелья любого вида.");
-        switch (conection->playerLvl)
-        {
-        case 1:
-            
-            break;
-        
-        default:
-            break;
+        printf("У меня есть зелья любого вида.\nКакое зелье вы хотели бы приобрести?\n Напишите номер зелья и его количество (0 закончили покупки)\n");
+        potionArr();
+        _Bool cheker;
+        printf("Ваши деньги %d\n", conection->playerMoney);
+        while(cheker){
+            cheker=potionBuying(conection);
         }
         return false;
-        //где инвентарь, лебовский?
         break;
     case 3:
+        /*Сюда запихаем продажу разных трав, приколов и т.д.*/
         return true;
-        //я не шучу
         break;
     case 4:
         int hchosed;
@@ -365,5 +361,106 @@ void blacksmithTrade(struct player* conection){
             printf("Вы ввели неверный номер опции, попробуйте ещё раз!\n");
             break;
         }
+    }
+}
+
+void potionArr(){
+    printf("1 %s %d, стоит %d",healingFlask.potionName,healingFlask.potionValue,healingFlask.cost);
+    printf("2 %s %d, стоит %d", stoneSkin.potionName,stoneSkin.potionValue,stoneSkin.cost);
+    printf("3 %s %d, стоит %d",magicEssence.potionName,magicEssence.potionValue,magicEssence.cost);
+    printf("4 %s %d, стоит %d",agilSkils.potionName,agilSkils.potionValue,agilSkils.cost);
+    printf("5 %s %d, стоит %d",strongEssence.potionName,strongEssence.potionValue,strongEssence.cost);
+    printf("6 %s %d, стоит %d",speedEssence.potionName,speedEssence.potionValue,speedEssence.cost);
+    printf("7 %s %d, стоит %d",luckEssence.potionName,luckEssence.potionValue,luckEssence.cost);
+}
+
+_Bool potionBuying(struct player* conection){
+    int hchose;
+    switch (hchose)
+    {
+    case 0:
+        return false;
+        break;    
+    case 1:
+        if(conection->playerMoney>=healingFlask.cost){
+            conection->playerPotionsBag.healingFlaskCount++;
+            conection->playerMoney-=healingFlask.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n", healingFlask.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n", healingFlask.potionName);
+        }
+        return true;
+        break;
+    case 2:
+        if(conection->playerMoney>=stoneSkin.cost){
+            conection->playerPotionsBag.stoneSkinCount++;
+            conection->playerMoney-=conection->playerPotionsBag.stoneSkin.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n", stoneSkin.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n", stoneSkin.potionName);
+        }
+        return true;
+        break;
+    case 3:
+        if(conection->playerMoney>=magicEssence.cost){
+            conection->playerPotionsBag.magicEssenceCount++;
+            conection->playerMoney-=magicEssence.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n", magicEssence.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n",magicEssence.potionName);
+        }
+        return true;
+        break;
+    case 4:
+        if(conection->playerMoney>=agilSkils.cost){
+            conection->playerPotionsBag.agilSkilsCount++;
+            conection->playerMoney-=agilSkils.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n",agilSkils.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n",agilSkils.potionName);
+        }
+        return true;
+        break;
+    case 5:
+        if(conection->playerMoney>=strongEssence.cost){
+            conection->playerPotionsBag.strongEssenceCount++;
+            conection->playerMoney-=strongEssence.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n",strongEssence.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n",strongEssence.potionName);
+        }
+        return true;
+        break;
+    case 6:
+        if(conection->playerMoney>=speedEssence.cost){
+            conection->playerPotionsBag.speedEssenceCount++;
+            conection->playerMoney-=speedEssence.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n",speedEssence.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n",speedEssence.potionName);
+        }
+        return true;
+        break;
+    case 7:
+        if(conection->playerMoney>=luckEssence.cost){
+            conection->playerPotionsBag.luckEssenceCount++;
+            conection->playerMoney-=luckEssence.cost;
+            printf("Вы приобрели %s. Ваши деньги %d\n",luckEssence.potionName,conection->playerMoney);
+        }
+        else{
+            printf("У вас не достаточно денег для покупки %s\n",luckEssence.potionName);
+        }
+        return true;
+        break;
+    default:
+        printf("Зелья под таким номером не существует.\n");
+        return true;
+        break;
     }
 }

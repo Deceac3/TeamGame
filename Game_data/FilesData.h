@@ -12,6 +12,7 @@ _Bool ovnerTavern(struct player*,int);
 _Bool PlayerHealth(int);
 _Bool batlemoove(struct player*, struct enemy*, int, int*);
 _Bool potionBagUse(int, struct player*, _Bool*);
+_Bool potionBuying(struct player*);
 
 float arrmorK(int);
 
@@ -23,7 +24,7 @@ int randexpf(int);
 int IntPlayerChoose();
 int potionBagChek(struct potion, int,int);
 
-void potionBagUseInfo(struct playerPotionsBag,int* count);
+void potionBagUseInfo(struct playerPotionsBag,int*);
 void TrevelLobby(int,_Bool*,struct player*);
 void LvlStatsUp(struct player*);
 void LvlExperienceUp(struct player*);
@@ -54,3 +55,4 @@ void strongEffect(struct player*);
 void speedEffect(struct player*);
 void luckEffect(struct player*);
 void textNextMoove(int,struct player*);
+void potionArr();

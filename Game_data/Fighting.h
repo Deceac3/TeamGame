@@ -32,7 +32,7 @@ void fightInRandomTrevel(struct player* conection,int enemy){
 }
 
 void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
-    int playerMooveSpeed=conection->playerSpeed, range=4,playerchoose, shortplayerspeed = conection->playerSpeed;
+    int playerMooveSpeed=conection->playerSpeed-conection->playerEffects.speedChanges, range=4,playerchoose, shortplayerspeed = conection->playerSpeed-conection->playerEffects.speedChanges;
     printf("В ходе вашего путешествия перед вами появляется %s\nБитва началась!\n", enemy->enemyName);
     while(enemy->hp>0 && conection->playerHP>0){
         sleep(2);
@@ -174,7 +174,7 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
     int x;
     if(*playerspeed < *enemyspeed){
         *enemyspeed = *enemyspeed- *playerspeed;
-        *playerspeed =  conection->playerSpeed;
+        *playerspeed =  conection->playerSpeed-conection->playerEffects.speedChanges;
         return 1;
     }
     else if (*playerspeed > *enemyspeed)
@@ -189,7 +189,7 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
         {
         case 0:
             *enemyspeed = 1;
-            *playerspeed = conection->playerSpeed;
+            *playerspeed = conection->playerSpeed-conection->playerEffects.speedChanges;
             return 1;
             break;
         case 1:
@@ -233,13 +233,13 @@ int WeaponDamage(struct player* conection){
     switch (conection->playerWeapon.type)
     {
     case 1: // магический урон
-        return conection->playerMind*conection->playerWeapon.damage;
+        return (conection->playerMind+conection->playerEffects.mindChanges)*conection->playerWeapon.damage;
         break;
     case 2: // физ урон от силы
-        return conection->playerStrong*conection->playerWeapon.damage;
+        return (conection->playerStrong+conection->playerEffects.strongChanges)*conection->playerWeapon.damage;
         break;
     case 3: // физ урон от ловкости
-        return conection->playerAgil*conection->playerWeapon.damage;
+        return (conection->playerAgil+conection->playerEffects.agilChanges)*conection->playerWeapon.damage;
         break;
     default:
         return 0;
@@ -427,7 +427,7 @@ _Bool PlayerHealth(int helth){
 void damageTaken(struct player* conection, struct enemy* enemy){
     int chance;
     int randCh = rand()%100;
-    chance = missChance(conection->playerAgil);
+    chance = missChance(conection->playerAgil+conection->playerEffects.agilChanges);
     if(randCh<chance){
         printf("Противник промахнулся\n");
     }
@@ -435,7 +435,7 @@ void damageTaken(struct player* conection, struct enemy* enemy){
         printf("Противник попал по вам\n");
         int damage;
         float armor;
-        armor = arrmorK(conection->PlayerPassiveArmor+ conection->PlayerArmor.defence);
+        armor = arrmorK(conection->PlayerPassiveArmor+ conection->PlayerArmor.defence+conection->playerEffects.armourChanges);
         damage = enemy->damage*armor;
         conection->playerHP -= damage;
         printf("Вы получили %d урона. У вас осталос %d|%d здоровья\n",damage,conection->playerHP, conection->playerMaxHp);
