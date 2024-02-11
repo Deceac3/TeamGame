@@ -419,11 +419,11 @@ void WeaponItemInfo(struct weapon weapon){
     }
 }
 
-void EndGame(time_t begin, int time){
+void EndGame(time_t begin, int time_main){
     time_t end,razn;
     end=time(NULL); 
     razn = end-begin;
-    printf("На часах %d час(а/ов). Кажется, так окончится ваша история...\n", time);
+    printf("На часах %d час(а/ов). Кажется, так окончится ваша история...\n", time_main);
     printf("Вы провели в игре %ldч:%ldм:%ldс\n",(razn/60/60),(razn/60)%60,razn%60);
 }
 
