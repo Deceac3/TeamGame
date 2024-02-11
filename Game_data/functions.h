@@ -247,7 +247,38 @@ void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
     }
 }
 
-void gameSelectMenu(struct player* conecntion){
+void count_hours(int clock, int var)
+{
+    int new_clock;
+    if(clock+var>24)
+    {
+        new_clock=clock+var-24;
+    }   
+    else
+    {
+        new_clock=clock+var;
+    }
+    printf("Нынешнее время: %d час(ов/а)\n\n", new_clock);
+}
+
+void relax(int time_now, int time_spand, struct player* conecntion)
+{
+    int new_hp;
+    count_hours(time_now, time_spand);
+    new_hp = time_spand*2;
+    if(conecntion->playerHP + new_hp >= conecntion->playerMaxHp)
+    {
+        conecntion->playerHP = conecntion->playerMaxHp;
+
+    }   
+    else
+    {
+        conecntion->playerHP += new_hp;
+        printf("Вы чувствуете себя лучше, показатель здоровья: %dHP\n", conecntion->playerHP);
+    }
+}
+
+void gameSelectMenu(struct player* conecntion, int time){
     int hchose;
     _Bool cheker;
     switch (conecntion->playerStage)
@@ -256,7 +287,7 @@ void gameSelectMenu(struct player* conecntion){
             cheker = true;
             while (cheker)
             {
-                printf("%s добро пожаловать в MAIN Town\nВы можете выбрать\n1)пойти в путешествие\n2)пойти к нпс\n3)Посмотреть статистику персоонажа\n4)выйти\n",conecntion->playerName);
+                printf("%s добро пожаловать в MAIN Town\nВы можете выбрать\n1)пойти в путешествие\n2)пойти к нпс\n3)Посмотреть статистику персоонажа\n4)Отдыхать\n5)Выйти\n",conecntion->playerName);
                 hchose = IntPlayerChoose();
                 switch (hchose)
                 {
@@ -278,6 +309,21 @@ void gameSelectMenu(struct player* conecntion){
                     system("clear");
                     break;
                 case 4:
+                    system("clear");
+                    printf("Комната в таверне стоит 1 монету. Желаете арендовать комнату?(Y/N)\n");
+                    char check;
+                    scanf("%s", &check);
+                    if((check == 'Y') && (conecntion->playerMoney-1>=0))
+                    {
+                        conecntion->playerMoney -= 1;
+                        relax(time, 8, conecntion);
+                    }
+                    else if((check == 'Y') && (conecntion->playerMoney-1<0))
+                    {
+                        printf("\"Нужно больше золота!\" - Недовольно кинул трактирщик\n");
+                    }
+                    break;
+                case 5:
                     system("clear");
                     printf("\nВы покинули игру\n");
                     conecntion->player_alive =false;
