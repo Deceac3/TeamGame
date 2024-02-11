@@ -230,12 +230,12 @@ void LvlStatsUp(struct player* conection){
     }
 }
 
-void TrevelLobby(int hchose, _Bool* cheker,struct player* conection, int time_main){
+void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
     switch (hchose)
     {
     case 1:
         printf("%s отправляется в случайное путешествие!\n", conection->playerName);
-        RandomTrevelForTresure(conection, time_main);
+        RandomTrevelForTresure(conection);
         break;
     case 2:    
         break;
@@ -278,7 +278,7 @@ void relax(int time_now, int time_spand, struct player* conecntion)
     }
 }
 
-void gameSelectMenu(struct player* conecntion, int main_time){
+void gameSelectMenu(struct player* conecntion){
     int hchose;
     _Bool cheker;
     switch (conecntion->playerStage)
@@ -295,7 +295,7 @@ void gameSelectMenu(struct player* conecntion, int main_time){
                     system("clear");
                     printf("Вы отправляетесь в путеществие. Куда вы пойдёте?\n1) Отправиться в путешествие ради сокровищ и золота.\n2) Отправиться в путешествию по заданию одного из нпс.\n3)Я передумал, вернуться назад.\n");
                     hchose = IntPlayerChoose();
-                    TrevelLobby(hchose,&cheker, conecntion, main_time);
+                    TrevelLobby(hchose,&cheker, conecntion);
                     cheker = false;
                     break;
                 case 2:
@@ -418,11 +418,11 @@ void WeaponItemInfo(struct weapon weapon){
     }
 }
 
-void EndGame(time_t begin, int time_main){
+void EndGame(time_t begin){
     time_t end,razn;
     end=time(NULL); 
     razn = end-begin;
-    printf("На часах %d час(а/ов). Кажется, так окончится ваша история...\n", time_main);
+    printf("На часах %d час(а/ов). Кажется, так окончится ваша история...\n", main_time);
     printf("Вы провели в игре %ldч:%ldм:%ldс\n",(razn/60/60),(razn/60)%60,razn%60);
 }
 
