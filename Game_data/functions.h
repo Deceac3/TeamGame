@@ -435,6 +435,6 @@ void timeChanges(int change){
 void dayChange(int change){
     main_day+=change;
     if(main_day>30){
-        main_day=main_day%30;
+        main_day=main_day;
     }
 }

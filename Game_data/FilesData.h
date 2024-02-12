@@ -64,6 +64,8 @@ void speedEffect(struct player*);
 void luckEffect(struct player*);
 void textNextMoove(int,struct player*);
 void potionArr();
+void QestLoading();
+void QestComplyteRevards(int, int,struct player*);
 
 #include "tradersQests.h"
 #include "traders.h"

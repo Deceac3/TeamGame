@@ -49,6 +49,7 @@ int EnemysCount=3;//Хочешь сделать больше противник�
 
 int main_time,main_day;
 void PreLoader(struct enemy* EnemysArray){
+    QestLoading();
     //снизу представленна запись оружия и брони в структуры классов
     mag.classWeapon = staff;
     mag.classArmour = robe;

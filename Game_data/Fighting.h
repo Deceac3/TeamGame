@@ -9,7 +9,7 @@
 
 void RandomTrevelForTresure(struct player* conection){
     int enemys,enemyFighter;         // В бета версии будет пока что так. Енемис это рандомное количество противников в одном путешествии. Каждый противник будет выбираться рандомно каждый заход.
-    enemys = rand()%6+2;      // от 2 до 8 противников будет выпадать. За каждую победу над противником будет выдаваться опыт и рандомная награда, такая ка деньги или особый предмет.
+    enemys = rand()%4+2;      // от 2 до 6 противников будет выпадать. За каждую победу над противником будет выдаваться опыт и рандомная награда, такая ка деньги или особый предмет.
     for(int i = 0; i<=enemys; i++){
         if(conection->player_alive){
             timeChanges(1);
@@ -91,7 +91,6 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
         else{
             int chance,enemyAgil =3, randCh = rand()%100;
             chance = missChance(enemyAgil);
-            printf("%d %d", randCh,chance);
             if(randCh>chance){
                 int damage,finalDamage;
                 float armor,perdamage;

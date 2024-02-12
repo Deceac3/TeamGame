@@ -3,7 +3,7 @@ int blacksmithQestCount=1;
 
 
 //Квесты Травницы
-int herbalistQestCount = 1;
+int herbalistQestCount = 1,herbalistLastQH=0,herbalistLastQD=0;
 struct QestTypeCollect herbalistFlowers = {.ItemCounts=5};
 //Функция сдачи квестов
 void herbalistqest(struct player* conection){
@@ -22,7 +22,9 @@ void herbalistqest(struct player* conection){
                 case 1:
                     printf("Спасобо за помощь путник! Приходи в следующий день и я дам тебе новый квест!\n");
                     herbalistQestCount++;
-                    conection->playerMoney+=25;
+                    herbalistLastQD=main_day+1;
+                    herbalistLastQH=main_time;
+                    QestComplyteRevards(25,40,conection);
                     cheker =false;
                     //Будет инвентарь, уничтожаем их пон брат
                     break;
@@ -40,7 +42,13 @@ void herbalistqest(struct player* conection){
             printf("Приходи когда принесёшь их мне\n");
         }
         break;
-    
+    case 2:
+        if((main_day>=herbalistLastQD)&&(main_time+(main_day-herbalistLastQD*24)>=herbalistLastQH)){
+            printf("Привет путник! У меня для тебя есть задание!\n");
+        }
+        else{
+            printf("Привет путник! У меня нет заданий для тебя пока что.\n");
+        }
     default:
         break;
     }
@@ -93,4 +101,10 @@ void ovnerTavernQests(struct player* conection){
 void QestLoading(){
     herbalistFlowers.GameItem = flowerOfRestoration;
     ovnerTavernLatterQ.GameItem = OvnerTavernLatter;
+}
+
+void QestComplyteRevards(int exp, int gold,struct player* conection){
+    conection->playerLvlExp+= exp;
+    conection->playerMoney+= gold;
+    LvlExperienceUp(conection);
 }
