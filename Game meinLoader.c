@@ -4,7 +4,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
-#include "Game_data/functions.h"
+#include "Game_data/FilesData.h"
 //тут был староста
 //тут была костыльная рожа
 //Тут был нормальный пацан...

@@ -1,5 +1,3 @@
-#include "tradersQests.h"
-
 // Кузнец. Он улучшает оружие, броню, но не может улучшить магические предметы, артефакты и т.д. Продаёт новые виды брони, оружия и для стрелков стрелы и пули
 _Bool blacksmith(struct player* conection,int choose){
     int hchosed;

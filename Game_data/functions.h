@@ -1,4 +1,3 @@
-#include "Fighting.h"
 /*  
 ПОСЛАНИЕ ПРЕДКАМ!!!! Нужно помнить что язык си работает с памятью и очень любит её копировать. 
 Мы передаём struct player* conection потому что мы будем менять значение в функции. 
@@ -247,24 +246,10 @@ void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
     }
 }
 
-void count_hours(int clock, int var)
-{
-    int new_clock;
-    if(clock+var>24)
-    {
-        new_clock=clock+var-24;
-    }   
-    else
-    {
-        new_clock=clock+var;
-    }
-    printf("Нынешнее время: %d час(ов/а)\n\n", new_clock);
-}
-
-void relax(int time_now, int time_spand, struct player* conecntion)
+void relax(int time_spand, struct player* conecntion)
 {
     int new_hp;
-    count_hours(time_now, time_spand);
+    timeChanges(time_spand);
     new_hp = time_spand*2;
     if(conecntion->playerHP + new_hp >= conecntion->playerMaxHp)
     {
@@ -315,7 +300,7 @@ void gameSelectMenu(struct player* conecntion){
                     if((check == 'Y') && (conecntion->playerMoney-1>=0))
                     {
                         conecntion->playerMoney -= 1;
-                        relax(time, 8, conecntion);
+                        relax(8, conecntion);
                     }
                     else if((check == 'Y') && (conecntion->playerMoney-1<0))
                     {

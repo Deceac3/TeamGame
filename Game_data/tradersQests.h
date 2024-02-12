@@ -1,5 +1,3 @@
-#include "FilesData.h"
-
 //Квесты Кузнеца
 int blacksmithQestCount=1;
 
