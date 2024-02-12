@@ -1,3 +1,9 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+#include <math.h>
 #include "struct.h"
 #include "items.c"
 /*

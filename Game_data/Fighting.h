@@ -62,7 +62,7 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
         }
     if(enemy->hp<=0){
         conection->playerLvlExp += enemy->expOut;
-        conection->playerLvlExp += enemy->moneyOut;
+        conection->playerMoney += enemy->moneyOut;
         conection->playerScore+=1;
         printf("Вам удалось победить %s!\n", enemy->enemyName);
         LvlExperienceUp(conection);

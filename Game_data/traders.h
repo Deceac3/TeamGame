@@ -291,10 +291,10 @@ void traderSelector(struct player* conection, int hchose){
             case 4:
                 printf("Вы подходите к владельцу таверны. ");
                 while(tradersBool){
-                printf("Что сделать?\n1) попросить задание\n2)посмотреть товары\n3)продать товары\n4)улсуги\n5)больше ничего не надо\n");
-                hchose = IntPlayerChoose();
-                tradersBool=ovnerTavern(conection,hchose);
-                cheker=false;
+                    printf("Что сделать?\n1) попросить задание\n2)посмотреть товары\n3)продать товары\n4)улсуги\n5)больше ничего не надо\n");
+                    hchose = IntPlayerChoose();
+                    tradersBool=ovnerTavern(conection,hchose);
+                    cheker=false;
                 }
                 break;
             default:
@@ -373,7 +373,7 @@ void potionArr(){
 }
 
 _Bool potionBuying(struct player* conection){
-    int hchose;
+    int hchose=IntPlayerChoose;
     switch (hchose)
     {
     case 0:
