@@ -1,9 +1,5 @@
 #include "struct.h"
 #include "items.c"
-#include "tradersQests.h"
-#include "traders.h"
-#include "Fighting.h"
-#include "functions.h"
 /*
 Во прикол. Все функции после их создания помещайте сюда. Так проще будет отслеживать, что где лежит и позволит вам распологать функции 
 в коде так, как вам хочется, иначе такие функции как: floar, _Bool или другого вида (не void\int функци) будут автоматом записываться
@@ -62,3 +58,8 @@ void speedEffect(struct player*);
 void luckEffect(struct player*);
 void textNextMoove(int,struct player*);
 void potionArr();
+
+#include "tradersQests.h"
+#include "traders.h"
+#include "Fighting.h"
+#include "functions.h"
