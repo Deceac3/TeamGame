@@ -92,12 +92,25 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
             int chance,enemyAgil =3, randCh = rand()%100;
             chance = missChance(enemyAgil);
             if(randCh>chance){
-                int damage,finalDamage;
-                float armor,perdamage;
-                damage = WeaponDamage(conection);
-                perdamage = (float)damage;
-                armor = arrmorK(enemy->armor);
-                finalDamage = (int)(perdamage*armor);
+                int finalDamage;
+                float armor,damage;
+                damage = (float)WeaponDamage(conection);
+                switch (conection->playerWeapon.type)
+                {
+                case 1:
+                    armor =magicArrmor(1);
+                    finalDamage = (int)(damage*armor);
+                    break;
+                case 2|3|5:
+                    armor = arrmorK(enemy->enemyArmor.defence);
+                    finalDamage = (int)(damage*armor);
+                    break;
+                case 4:
+                    finalDamage = (int)(damage);
+                    break;
+                default:
+                    break;
+                }
                 enemy->hp=enemy->hp - (finalDamage);
                 printf("Вы атакуете врага и наносите ему урона %d\nздоровье противника %d\n", finalDamage,enemy->hp);
                 return false;
@@ -237,6 +250,12 @@ int WeaponDamage(struct player* conection){
         break;
     case 3: // физ урон от ловкости
         return (conection->playerAgil+conection->playerEffects.agilChanges)*conection->playerWeapon.damage;
+        break;
+    case 4: // пронзающий урон
+        return (conection->playerAgil+conection->playerEffects.agilChanges+conection->playerStrong+conection->playerEffects.strongChanges)*conection->playerWeapon.damage/2;
+        break;
+    case 5: // урон от оружия берсерка
+        return (5+conection->playerMaxHp-conection->playerHP)*conection->playerWeapon.damage;
         break;
     default:
         return 0;
@@ -410,6 +429,11 @@ void luckEffect(struct player* conection){
 float arrmorK(int armor){
     float k = 0.12;
     return (1-(k*armor/(1+k*abs(armor))));
+}
+
+float magicArrmor(int marr){
+    float k=0.2;
+    return(1-(k*marr/(1+k*abs(marr))));
 }
 
 _Bool PlayerHealth(int helth){

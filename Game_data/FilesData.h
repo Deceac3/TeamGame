@@ -30,7 +30,7 @@ int randexpf(int);
 int IntPlayerChoose();
 int potionBagChek(struct potion, int,int);
 
-void PreLoader(struct enemy*);
+void PreLoader();
 void potionBagUseInfo(struct playerPotionsBag,int*);
 void TrevelLobby(int,_Bool*,struct player*);
 void LvlStatsUp(struct player*);
@@ -65,6 +65,7 @@ void luckEffect(struct player*);
 void textNextMoove(int,struct player*);
 void potionArr();
 void QestLoading();
+void enemyLoading();
 void QestComplyteRevards(int, int,struct player*);
 
 #include "tradersQests.h"

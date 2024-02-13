@@ -6,12 +6,12 @@ struct weapon staff = {"Магический посох", 4, 1, 10, 0,1};  // б
 struct weapon WizardStaff ={"Посох грома",5,1,50,0,1.4};
 struct weapon hands = {"Руки",1,2,0,-1,1};     //   Базовое оружие любого персонажа у которого нет оружия
 
-struct armor rags = {"rags", 3,5,0};  // Базовая броня вора
-struct armor armour = {"Броня", 6,20,0};  // Базова броня танка
-struct armor robe = {"Роба", 2,6,0};    // Базовая броня мага
-struct armor HiddenChainmail ={"Броня со скрытой кольчугой", 5,15,0};
-struct armor MehaArmor = {"Механическая броня",8,30,0};
-struct armor cultRobe = {"Роба культиста",4,10,0};
+struct armor rags = {"rags",3, 3,5,0};  // Базовая броня вора
+struct armor armour = {"Броня",1, 6,20,0};  // Базова броня танка
+struct armor robe = {"Роба",2, 2,6,0};    // Базовая броня мага
+struct armor HiddenChainmail ={"Броня со скрытой кольчугой",3,5,15,0};
+struct armor MehaArmor = {"Механическая броня",1,8,30,0};
+struct armor cultRobe = {"Роба культиста",2,4,10,0};
 
 struct GameItem wolfSkin = {"Волчья шкура",1,5};
 struct GameItem bearSkin = {"Медвежья шкура",1, 10};
@@ -36,9 +36,11 @@ struct effects enemyEffects = {0,0,0,0,0,0,0};     //   отсутствие э�
 
 struct playerPotionsBag prePlayerPB = {.healingFlaskCount = 1,.stoneSkinCount = 0,.magicEssenceCount=0,.agilSkilsCount=0,.strongEssenceCount=0,.speedEssenceCount=0,.luckEssenceCount=0};
 
-struct enemy wolf = {"Волк",15,4,1,20,2,35,1};
-struct enemy bear = {"Медведь",40,10,0,25,1,45,1};
-struct enemy monkey = {"Макака",20,6,3,20,4,40,2};
+struct enemy wolf = {"Волк",15,4,20,2,35,1};
+struct armor wolfArm ={"Волчья шкура",1,1,0,0};
+struct weapon wolfClaws ={"Волчьи когти",1,2,0,0,1.5};
+struct enemy bear = {"Медведь",40,10,25,1,45,1};
+struct enemy monkey = {"Макака",20,6,20,4,40,2};
 
 struct class mag = {1,50,1,2,3,2,4,50,2};
 struct class theif = {2,70,2,6,1,3,3,30,10};
@@ -48,8 +50,9 @@ struct enemy* EnemysArray;
 int EnemysCount=3;//Хочешь сделать больше противников? Добавь +1 к этому счётчику и запиши противника в массив. Потом будем делить их по локам
 
 int main_time,main_day;
-void PreLoader(struct enemy* EnemysArray){
+void PreLoader(){
     QestLoading();
+    enemyLoading();
     //снизу представленна запись оружия и брони в структуры классов
     mag.classWeapon = staff;
     mag.classArmour = robe;
@@ -57,14 +60,6 @@ void PreLoader(struct enemy* EnemysArray){
     theif.classArmour = rags;
     tank.classArmour = armour;
     tank.classWeapon = spire;
-    //снизу представленна запись особых предметов в структуры противников
-    wolf.GameItem = wolfSkin;
-    bear.GameItem = bearSkin;
-    monkey.GameItem = theMonkeyBar;
-    //снизу представленна запись предметов в массив структур
-    EnemysArray[0]=wolf;
-    EnemysArray[1]=bear;
-    EnemysArray[2]=monkey;
     //Снизу запись всех видов зелий в портфель героя
     prePlayerPB.healingFlask=healingFlask;
     prePlayerPB.stoneSkin=stoneSkin;
@@ -75,5 +70,20 @@ void PreLoader(struct enemy* EnemysArray){
     prePlayerPB.luckEssence=luckEssence;
     main_time=12;
     main_day=1;
+}
+
+void enemyLoading(){
+    //снизу представленна запись предметов в массив структур
+    EnemysArray[0]=wolf;
+    EnemysArray[1]=bear;
+    EnemysArray[2]=monkey;
+    //снизу представленна запись особых предметов в структуры противников
+    wolf.GameItem = wolfSkin;
+    bear.GameItem = bearSkin;
+    monkey.GameItem = theMonkeyBar;
+    //снизу представлена запись брони вражеским существам
+    wolf.enemyArmor=wolfArm;
+    //снизу представлена запись оружия вражеским сущствам
+    wolf.enemyWeapon=wolfClaws;
 }
 time_t begin;

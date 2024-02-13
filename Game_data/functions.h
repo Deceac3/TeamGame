@@ -427,7 +427,7 @@ void potionChekInfo(struct potion potion, int count){
 void timeChanges(int change){
     main_time+=change;
     if(main_time>24){
-        main_time-=main_time%24;
+        main_time=main_time%24;
         dayChange(main_time/24);
     }
 }

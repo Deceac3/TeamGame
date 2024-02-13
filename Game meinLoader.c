@@ -2,15 +2,12 @@
 //тут был староста
 //тут была костыльная рожа
 //Тут был нормальный пацан...
-/*
-пишем миниму кода здесь. Это файл инициализаций.
-*/
 
 int main(void)
 {   
     begin=time(NULL);
     EnemysArray =malloc(EnemysCount*sizeof(struct enemy));
-    PreLoader(EnemysArray);              // Догружаем микропроцессы присваивания классов и т.д. читайте прато
+    PreLoader();              // Догружаем микропроцессы присваивания классов и т.д. читайте прато
     srand(time(NULL));
     system("clear");
     printf("Версия 31\n");
