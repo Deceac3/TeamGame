@@ -85,7 +85,8 @@ struct enemy
     int expOut;
     int moneyOut;
     int speed;
-    int rangeAtack;
+    int phisArmour;
+    int magArmour;
     struct armor enemyArmor;
     struct weapon enemyWeapon;
     struct GameItem GameItem;

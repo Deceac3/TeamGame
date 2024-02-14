@@ -48,7 +48,7 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
             }
             break;
         case 2:
-            if(range>enemy->rangeAtack){
+            if(range>enemy->enemyWeapon.range){
                 printf("%s делает 1 шаг в вашем направлении\n", enemy->enemyName);
                 range =range-1;
             }
@@ -75,8 +75,8 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
     {
     case 1:
         if(*rangeuk>1){
-        *rangeuk =*rangeuk-1;
-        return false;
+            *rangeuk =*rangeuk-1;
+            return false;
         }
         else{
             printf("Вы не можете сделать шаг вперёд. Расстояние между вами и противником %d!\n",*rangeuk);
@@ -98,11 +98,11 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
                 switch (conection->playerWeapon.type)
                 {
                 case 1:
-                    armor =magicArrmor(1);
+                    armor =magicArrmor(armBackTypeEnemy(2,*enemy));
                     finalDamage = (int)(damage*armor);
                     break;
                 case 2|3|5:
-                    armor = arrmorK(enemy->enemyArmor.defence);
+                    armor = arrmorK(armBackTypeEnemy(1,*enemy));
                     finalDamage = (int)(damage*armor);
                     break;
                 case 4:
@@ -254,7 +254,7 @@ int WeaponDamage(struct player* conection){
     case 4: // пронзающий урон
         return (conection->playerAgil+conection->playerEffects.agilChanges+conection->playerStrong+conection->playerEffects.strongChanges)*conection->playerWeapon.damage/2;
         break;
-    case 5: // урон от оружия берсерка
+    case 5: // урон от оружия берсерка считается физическим
         return (5+conection->playerMaxHp-conection->playerHP)*conection->playerWeapon.damage;
         break;
     default:
@@ -456,13 +456,96 @@ void damageTaken(struct player* conection, struct enemy* enemy){
         printf("Противник попал по вам\n");
         int damage;
         float armor;
-        armor = arrmorK(conection->PlayerPassiveArmor+ conection->PlayerArmor.defence+conection->playerEffects.armourChanges);
-        damage = enemy->damage*armor;
+        switch (enemy->enemyWeapon.type)
+        {
+        case 1:
+            armor = magicArrmor(arrBackType(2,conection)+conection->playerEffects.armourChanges);
+            damage = (enemy->damage*enemy->enemyWeapon.damage)*armor;
+            break;
+        case 2:
+            armor = arrmorK(arrBackType(1,conection)+conection->playerEffects.armourChanges);
+            damage = (enemy->damage*enemy->enemyWeapon.damage)*armor;
+            break;
+        default:
+            break;
+        }
         conection->playerHP -= damage;
         printf("Вы получили %d урона. У вас осталос %d|%d здоровья\n",damage,conection->playerHP, conection->playerMaxHp);
         if(PlayerHealth(conection->playerHP)){
             printf("Вы погибли! игра окончена!\n");
             conection->player_alive=false;
         }
+    }
+}
+
+int arrBackType(int type,struct player* conection){
+    switch (type)
+    {
+    case 1:
+        if(conection->PlayerArmor.type =1){
+            return conection->PlayerPassiveArmor+conection->PlayerArmor.defence;
+        }
+        else if(conection->PlayerArmor.type=3){
+            return conection->PlayerPassiveArmor+(conection->PlayerArmor.defence/2);
+        }
+        else{
+            return conection->PlayerPassiveArmor;
+        }
+        break;
+    case 2:
+        if(conection->PlayerArmor.type = 2){
+            return conection->playerPassiveMagArmor+conection->PlayerArmor.defence;
+        }
+        else if(conection->PlayerArmor.type=3){
+            return conection->playerPassiveMagArmor+(conection->PlayerArmor.defence/2);
+        }
+        else{
+            return conection->playerPassiveMagArmor;
+        }
+        break;
+    default:
+        return 0;
+        break;
+    }
+}
+
+int armBackTypeEnemy(int type, struct enemy enemy){
+    switch (type)
+    {
+    case 1:
+        switch (enemy.enemyArmor.type)
+        {
+        case 1:
+            return enemy.phisArmour+enemy.enemyArmor.defence+(enemy.enemyArmor.defence);
+            break;
+        case 2:
+            return enemy.phisArmour+enemy.enemyArmor.defence;
+            break;
+        case 3:
+            return enemy.phisArmour+enemy.enemyArmor.defence+(enemy.enemyArmor.defence/2);
+            break;
+        default:
+            break;
+        }
+        break;
+    case 2:
+        switch (enemy.enemyArmor.type)
+        {
+        case 1:
+            return enemy.magArmour+enemy.enemyArmor.defence;
+            break;
+        case 2:
+            return enemy.magArmour+enemy.enemyArmor.defence+(enemy.enemyArmor.defence);
+            break;
+        case 3:
+            return enemy.magArmour+enemy.enemyArmor.defence+(enemy.enemyArmor.defence/2);
+            break;
+        default:
+            break;
+        }
+        break;
+    default:
+        return 0;
+        break;
     }
 }

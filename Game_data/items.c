@@ -36,11 +36,17 @@ struct effects enemyEffects = {0,0,0,0,0,0,0};     //   отсутствие э�
 
 struct playerPotionsBag prePlayerPB = {.healingFlaskCount = 1,.stoneSkinCount = 0,.magicEssenceCount=0,.agilSkilsCount=0,.strongEssenceCount=0,.speedEssenceCount=0,.luckEssenceCount=0};
 
-struct enemy wolf = {"Волк",15,4,20,2,35,1};
+struct enemy wolf = {"Волк",15,4,20,2,35,0,0};
 struct armor wolfArm ={"Волчья шкура",1,1,0,0};
-struct weapon wolfClaws ={"Волчьи когти",1,2,0,0,1.5};
-struct enemy bear = {"Медведь",40,10,25,1,45,1};
-struct enemy monkey = {"Макака",20,6,20,4,40,2};
+struct weapon wolfClaws ={"Волчьи когти",1,2,0,0,1};
+
+struct enemy bear = {"Медведь",40,10,25,1,45,0,0};
+struct armor bearArm ={"Медвежья шкура",1,2,0,0};
+struct weapon bearClaws={"Медвежьи когти",1,2,0,0,1};
+
+struct enemy monkey = {"Макака",20,6,20,4,40,1,1};
+struct armor monkeyArm ={"Мех макаки",3,4,0,0};
+struct weapon monkeyBar={"Палка макаки",2,2,0,0,1};
 
 struct class mag = {1,50,1,2,3,2,4,50,2};
 struct class theif = {2,70,2,6,1,3,3,30,10};
@@ -75,15 +81,18 @@ void PreLoader(){
 void enemyLoading(){
     //снизу представленна запись предметов в массив структур
     EnemysArray[0]=wolf;
-    EnemysArray[1]=bear;
-    EnemysArray[2]=monkey;
-    //снизу представленна запись особых предметов в структуры противников
     wolf.GameItem = wolfSkin;
-    bear.GameItem = bearSkin;
-    monkey.GameItem = theMonkeyBar;
-    //снизу представлена запись брони вражеским существам
     wolf.enemyArmor=wolfArm;
-    //снизу представлена запись оружия вражеским сущствам
     wolf.enemyWeapon=wolfClaws;
+
+    EnemysArray[1]=bear;
+    bear.GameItem = bearSkin;
+    bear.enemyArmor=bearArm;
+    bear.enemyWeapon=bearClaws;
+
+    EnemysArray[2]=monkey;
+    monkey.GameItem = theMonkeyBar;
+    monkey.enemyArmor=monkeyArm;
+    monkey.enemyWeapon=monkeyBar;
 }
 time_t begin;

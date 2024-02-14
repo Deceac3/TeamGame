@@ -21,6 +21,7 @@ _Bool potionBagUse(int, struct player*, _Bool*);
 _Bool potionBuying(struct player*);
 
 float arrmorK(int);
+float magicArrmor(int);
 
 int missChance(int);
 int nextStep(struct player*,struct enemy*, int*, int*);
@@ -29,6 +30,8 @@ int DiceNumb(int);
 int randexpf(int);
 int IntPlayerChoose();
 int potionBagChek(struct potion, int,int);
+int arrBackType(int,struct player*);
+int armBackTypeEnemy(int, struct enemy);
 
 void PreLoader();
 void potionBagUseInfo(struct playerPotionsBag,int*);
@@ -67,6 +70,8 @@ void potionArr();
 void QestLoading();
 void enemyLoading();
 void QestComplyteRevards(int, int,struct player*);
+void timeChanges(int);
+void dayChange(int);
 
 #include "tradersQests.h"
 #include "traders.h"
