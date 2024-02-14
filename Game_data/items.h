@@ -80,19 +80,19 @@ void PreLoader(){
 
 void enemyLoading(){
     //снизу представленна запись предметов в массив структур
-    EnemysArray[0]=wolf;
     wolf.GameItem = wolfSkin;
     wolf.enemyArmor=wolfArm;
     wolf.enemyWeapon=wolfClaws;
+    EnemysArray[0]=&wolf;
 
-    EnemysArray[1]=bear;
     bear.GameItem = bearSkin;
     bear.enemyArmor=bearArm;
     bear.enemyWeapon=bearClaws;
+    EnemysArray[1]=&bear;
 
-    EnemysArray[2]=monkey;
     monkey.GameItem = theMonkeyBar;
     monkey.enemyArmor=monkeyArm;
     monkey.enemyWeapon=monkeyBar;
+    EnemysArray[2]=&monkey;
 }
 time_t begin;

@@ -470,7 +470,7 @@ void damageTaken(struct player* conection, struct enemy* enemy){
             break;
         }
         conection->playerHP -= damage;
-        printf("Вы получили %d урона. У вас осталос %d|%d здоровья\n",damage,conection->playerHP, conection->playerMaxHp);
+        printf("Вы получили %d урона.\n",damage);
         if(PlayerHealth(conection->playerHP)){
             printf("Вы погибли! игра окончена!\n");
             conection->player_alive=false;
