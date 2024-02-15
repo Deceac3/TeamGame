@@ -48,12 +48,12 @@ struct enemy monkey = {"Макака",20,6,20,4,40,1,1};
 struct armor monkeyArm ={"Мех макаки",3,4,0,0};
 struct weapon monkeyBar={"Палка макаки",2,2,0,0,1};
 
-struct class mag = {1,50,1,2,3,2,4,50,2};
-struct class theif = {2,70,2,6,1,3,3,30,10};
+struct class mag = {1,50,1,2,4,2,4,50,2};
+struct class theif = {2,70,2,5,3,3,3,30,10};
 struct class tank = {3,100,4,2,1,4,1,40,7};
 
-struct enemy* EnemysArray;
 int EnemysCount=3;//Хочешь сделать больше противников? Добавь +1 к этому счётчику и запиши противника в массив. Потом будем делить их по локам
+struct enemy* EnemysArray;
 
 int main_time,main_day;
 void PreLoader(){
@@ -83,16 +83,16 @@ void enemyLoading(){
     wolf.GameItem = wolfSkin;
     wolf.enemyArmor=wolfArm;
     wolf.enemyWeapon=wolfClaws;
-    EnemysArray[0]=&wolf;
+    EnemysArray[0]=wolf;
 
     bear.GameItem = bearSkin;
     bear.enemyArmor=bearArm;
     bear.enemyWeapon=bearClaws;
-    EnemysArray[1]=&bear;
+    EnemysArray[1]=bear;
 
     monkey.GameItem = theMonkeyBar;
     monkey.enemyArmor=monkeyArm;
     monkey.enemyWeapon=monkeyBar;
-    EnemysArray[2]=&monkey;
+    EnemysArray[2]=monkey;
 }
 time_t begin;
