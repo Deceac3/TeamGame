@@ -4,6 +4,8 @@
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
+void QestLoading();
+void enemyLoading();
 #include "struct.h"
 #include "items.h"
 /*
@@ -67,8 +69,6 @@ void speedEffect(struct player*);
 void luckEffect(struct player*);
 void textNextMoove(int,struct player*);
 void potionArr();
-void QestLoading();
-void enemyLoading();
 void QestComplyteRevards(int, int,struct player*);
 void timeChanges(int);
 void dayChange(int);

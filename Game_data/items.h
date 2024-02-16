@@ -48,9 +48,9 @@ struct enemy monkey = {"Макака",20,6,20,4,40,1,1};
 struct armor monkeyArm ={"Мех макаки",3,4,0,0};
 struct weapon monkeyBar={"Палка макаки",2,2,0,0,1};
 
-struct class mag = {1,50,1,2,4,2,4,50,2};
-struct class theif = {2,70,2,5,3,3,3,30,10};
-struct class tank = {3,100,4,2,1,4,1,40,7};
+struct class mag = {.classId =1,.hp=50,.str=1,.agil=2,.mind=4,.armourPassive=2,.magArmourPassive=1,.luck=4,.startSpeed=50,.money=2};
+struct class theif = {.classId =2,.hp=70,.str=2,.agil=5,.mind=3,.armourPassive=3,.magArmourPassive=1,.luck=3,.startSpeed=30,.money=10};
+struct class tank = {.classId =3,.hp=100,.str=4,.agil=2,.mind=1,.armourPassive=4,.magArmourPassive=1,.luck=1,.startSpeed=40,.money=7};
 
 int EnemysCount=3;//Хочешь сделать больше противников? Добавь +1 к этому счётчику и запиши противника в массив. Потом будем делить их по локам
 struct enemy* EnemysArray;

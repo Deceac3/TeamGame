@@ -11,7 +11,7 @@ void herbalistqest(struct player* conection){
     {
     case 1:
         printf("Принеси мне 5 алых цветков регенерации из туманных лесов и я тебе неплохо заплачу!\n");
-        if(conection->playerLvl == conection->playerLvl){       //Пишем условие есть ли 5 цветочков. Зависит от типо как инвентарь пон
+        if(conection->playerLvlExp == conection->playerLvlExpNext){       //Пишем условие есть ли 5 цветочков. Зависит от типо как инвентарь пон
             _Bool cheker;
             int hchose;
             while (cheker){

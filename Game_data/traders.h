@@ -85,11 +85,26 @@ _Bool herbalist(struct player* conection,int choose){//АААААААААААА�
         return true;
         break;
     case 4:
-        int hchosed;
         printf("Я могу сварить для тебя настойку на травах, которая снимет все негативные эффекты и полностью исцелит тебя всего за 10 монет\n");
-        if(conection->playerMoney>10 || conection->playerHP == conection->playerMaxHp){
+        if(conection->playerMoney>10 || conection->playerHP != conection->playerMaxHp){
             printf("1)Восстановить здоровье?\n2)Bruh\n");
-            hchosed = IntPlayerChoose();
+            _Bool cheker=true;
+            while (cheker)
+            {
+                int hchosed= IntPlayerChoose();
+                switch (hchosed)
+                {
+                case 1:
+                    return false;
+                    break;
+                case 2:
+                    return false;
+                    break;
+                default:
+                    printf("Неверный номер\n");
+                    break;
+                }
+            }
         }
         else{
             printf("Я чувствую что тебе это не надо\n");
@@ -373,7 +388,7 @@ void potionArr(){
 }
 
 _Bool potionBuying(struct player* conection){
-    int hchose=IntPlayerChoose;
+    int hchose=IntPlayerChoose();
     switch (hchose)
     {
     case 0:

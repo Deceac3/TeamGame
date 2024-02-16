@@ -31,7 +31,7 @@ void fightInRandomTrevel(struct player* conection,int enemy){
 }
 
 void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
-    int playerMooveSpeed=conection->playerSpeed-conection->playerEffects.speedChanges, range=4,playerchoose, shortplayerspeed = conection->playerSpeed-conection->playerEffects.speedChanges;
+    int range=4,playerchoose, shortplayerspeed = conection->playerSpeed-conection->playerEffects.speedChanges;
     printf("Вот уже %d час(а/ов)... Похоже, перед вами возникла очередная преграда: %s\nБитва началась!\n", main_time, enemy->enemyName);
     while(enemy->hp>0 && conection->playerHP>0){
         sleep(2);
@@ -158,7 +158,7 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
                 {
                     textNextMoove(*rangeuk,conection);
                     hchose = IntPlayerChoose();
-                    shek = batlemoove(conection,enemy,hchose,*rangeuk);
+                    shek = batlemoove(conection,enemy,hchose,rangeuk);
                 }
             }
             return false;
@@ -293,7 +293,6 @@ int potionBagChek(struct potion potion, int count,int i){
 }
 
 _Bool potionBagUse(int hchose, struct player* conection,_Bool* NotUsed){
-    _Bool cheker=true;
     switch (hchose)
     {
     case 1:     //Зелье исцеления
@@ -482,10 +481,10 @@ int arrBackType(int type,struct player* conection){
     switch (type)
     {
     case 1:
-        if(conection->PlayerArmor.type =1){
+        if(conection->PlayerArmor.type == 1){
             return conection->PlayerPassiveArmor+conection->PlayerArmor.defence;
         }
-        else if(conection->PlayerArmor.type=3){
+        else if(conection->PlayerArmor.type== 3){
             return conection->PlayerPassiveArmor+(conection->PlayerArmor.defence/2);
         }
         else{
@@ -493,10 +492,10 @@ int arrBackType(int type,struct player* conection){
         }
         break;
     case 2:
-        if(conection->PlayerArmor.type = 2){
+        if(conection->PlayerArmor.type == 2){
             return conection->playerPassiveMagArmor+conection->PlayerArmor.defence;
         }
-        else if(conection->PlayerArmor.type=3){
+        else if(conection->PlayerArmor.type == 3){
             return conection->playerPassiveMagArmor+(conection->PlayerArmor.defence/2);
         }
         else{
@@ -525,6 +524,7 @@ int armBackTypeEnemy(int type, struct enemy enemy){
             return enemy.phisArmour+enemy.enemyArmor.defence+(enemy.enemyArmor.defence/2);
             break;
         default:
+            return 0;
             break;
         }
         break;
@@ -541,6 +541,7 @@ int armBackTypeEnemy(int type, struct enemy enemy){
             return enemy.magArmour+enemy.enemyArmor.defence+(enemy.enemyArmor.defence/2);
             break;
         default:
+            return 0;
             break;
         }
         break;

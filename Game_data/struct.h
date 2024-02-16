@@ -1,4 +1,4 @@
-#define NAMES   20
+#define NAMES   50
 
 struct effects
 {
@@ -12,7 +12,7 @@ struct effects
 */
 struct GameItem
 {
-    char* itemName;
+    char itemName[NAMES];
     int itemCode;
     int itemCost;
 };
@@ -27,7 +27,7 @@ struct GameItem
 */
 struct potion
 {
-    char* potionName;
+    char potionName[NAMES];
     int potionType;
     int potionValue;
     int cost;
@@ -42,7 +42,7 @@ struct potion
 */
 struct weapon
 {
-    char* name;
+    char name[NAMES];
     int range;
     int type;       // Тип оружия это то, от чего оно скелится. Выше список всех типов будет
     int cost;
@@ -57,7 +57,7 @@ struct weapon
 */
 struct armor
 {
-    char* name;
+    char name[NAMES];
     int type;
     int defence;
     int cost;
@@ -72,6 +72,7 @@ struct class
     int agil;
     int mind;
     int armourPassive;
+    int magArmourPassive;
     int luck;
     int startSpeed;
     int money;
@@ -81,7 +82,7 @@ struct class
 
 struct enemy
 {
-    char* enemyName;
+    char enemyName[NAMES];
     int hp;
     int damage;
     int expOut;
@@ -121,7 +122,7 @@ struct player
     struct effects playerEffects;
     struct weapon playerWeapon;
     struct armor PlayerArmor;
-    char playerName[20];
+    char playerName[NAMES];
     int playerHP,playerMaxHp, playerClass, playerMind, playerStrong, playerAgil, playerMoney, playerLvl, playerLvlExp,playerLvlExpNext, playerStage,playerLuck,playerSpeed,PlayerPassiveArmor,playerScore,playerPassiveMagArmor;
     _Bool player_alive;
 };
