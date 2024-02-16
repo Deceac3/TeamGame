@@ -1,3 +1,5 @@
+#define NAMES   20
+
 struct effects
 {
     int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
@@ -99,8 +101,22 @@ struct playerPotionsBag
     int healingFlaskCount,stoneSkinCount,magicEssenceCount,agilSkilsCount,strongEssenceCount,speedEssenceCount,luckEssenceCount;
 };
 
+struct task_items
+{
+    char name[NAMES];
+    char description[NAMES];
+};
+
+struct inv
+{
+    struct weapon per_wep[4];
+    struct armor per_arm[4];
+    struct task_items per_it[5];
+}pack;
+
 struct player 
 {
+    struct inv pack;
     struct playerPotionsBag playerPotionsBag;
     struct effects playerEffects;
     struct weapon playerWeapon;
