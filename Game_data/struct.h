@@ -1,4 +1,5 @@
 #define NAMES   50
+#define DESCRIPTION 500
 
 struct effects
 {
@@ -12,6 +13,7 @@ struct effects
 */
 struct GameItem
 {
+    char descr[DESCRIPTION];
     char itemName[NAMES];
     int itemCode;
     int itemCost;
@@ -27,6 +29,7 @@ struct GameItem
 */
 struct potion
 {
+    char descr[DESCRIPTION];
     char potionName[NAMES];
     int potionType;
     int potionValue;
@@ -42,6 +45,7 @@ struct potion
 */
 struct weapon
 {
+    char descript[DESCRIPTION];
     char name[NAMES];
     int range;
     int type;       // Тип оружия это то, от чего оно скелится. Выше список всех типов будет
@@ -57,6 +61,7 @@ struct weapon
 */
 struct armor
 {
+    char descript[DESCRIPTION];
     char name[NAMES];
     int type;
     int defence;
@@ -102,17 +107,12 @@ struct playerPotionsBag
     int healingFlaskCount,stoneSkinCount,magicEssenceCount,agilSkilsCount,strongEssenceCount,speedEssenceCount,luckEssenceCount;
 };
 
-struct task_items
-{
-    char name[NAMES];
-    char description[NAMES];
-};
 
 struct inv
 {
     struct weapon per_wep[4];
     struct armor per_arm[4];
-    struct task_items per_it[5];
+    struct GameItem GameItem[5];
 }pack;
 
 struct player 

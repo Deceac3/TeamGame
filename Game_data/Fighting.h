@@ -6,7 +6,9 @@
 3) атаковать противника 4) использовать предметы( в будущем) 
 */
 
-
+/*
+Демо версия функции, она вызывается для создания площадки для битвы. В зависимости от рандом, выпадает количество противников от 2 до 6
+*/
 void RandomTrevelForTresure(struct player* conection){
     int enemys,enemyFighter;         // В бета версии будет пока что так. Енемис это рандомное количество противников в одном путешествии. Каждый противник будет выбираться рандомно каждый заход.
     enemys = rand()%4+2;      // от 2 до 6 противников будет выпадать. За каждую победу над противником будет выдаваться опыт и рандомная награда, такая ка деньги или особый предмет.
@@ -22,6 +24,9 @@ void RandomTrevelForTresure(struct player* conection){
     }
 }
 
+/*
+Демо функция которая вызывается для создания противника и начинает битву с выбраным противником
+*/
 void fightInRandomTrevel(struct player* conection,int enemy){
     int enemyMooveSpeed;
     struct enemy NextEnemy;
@@ -30,6 +35,9 @@ void fightInRandomTrevel(struct player* conection,int enemy){
     Batle(conection,&enemyMooveSpeed,&NextEnemy);
 }
 
+/*
+Демо функция создания битвы. Принимет в себя противника с которым будет сражаться герой
+*/
 void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     int range=4,playerchoose, shortplayerspeed = conection->playerSpeed-conection->playerEffects.speedChanges;
     printf("Вот уже %d час(а/ов)... Похоже, перед вами возникла очередная преграда: %s\nБитва началась!\n", main_time, enemy->enemyName);
@@ -70,6 +78,9 @@ void Batle(struct player* conection,int* enemyMooveSpeed,struct enemy* enemy){
     }
 }
 
+/*
+Функция вовращает состояние хода героя и предоставляет выбор действия игроку.
+*/
 _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* rangeuk){
     switch (chose)
     {
@@ -178,8 +189,9 @@ _Bool batlemoove(struct player* conection, struct enemy* enemy, int chose, int* 
     }
 }
 
-
-
+/*
+Функция возвращает целочисленную констнанту того, кто будет ходить в зависимости от их скорости и прошлых действий
+*/
 int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int* enemyspeed){
     int x;
     if(*playerspeed < *enemyspeed){
@@ -215,6 +227,9 @@ int nextStep(struct player* conection,struct enemy* enemy, int* playerspeed, int
     }
 }
 
+/*
+Функция выводит текст следующего хода главного героя. В случае некоторых невозможных действий, строки с действием зачёркиваются
+*/
 void textNextMoove(int range,struct player* conection){
     if(range>conection->playerWeapon.range){
             if (range >1){
@@ -239,6 +254,9 @@ void textNextMoove(int range,struct player* conection){
 ОНИ НЕ МЕНЯЮТ МОДЕЛЬ ФАЙТИНГА, А РАСЧИТЫВАЮТ ЗНАЧЕНИЯ И ЭФФЕКТЫ
 */
 
+/*
+функция возвращает целочисленное количество урона по его типу и всем эффектам
+*/
 int WeaponDamage(struct player* conection){
     switch (conection->playerWeapon.type)
     {
@@ -263,7 +281,9 @@ int WeaponDamage(struct player* conection){
     }
 }
 
-//При необходимость броска кости (не важной какого типа), передаём в функцию номер кости и на выходе получаем результат выпавшей кости.
+/*
+Функция возвращает значение, которое выпадает на кубике заданного значения по Numb
+*/
 int DiceNumb(int Numb){
     int result;
     result = rand()%Numb;
@@ -271,17 +291,26 @@ int DiceNumb(int Numb){
     return result;
 }
 
+/*
+функция возвращает процентный шанс промаха
+*/
 int missChance(int agil){
     float k = 0.07;
     return (k*agil/(1+k*abs(agil))*100);
 }
 
+/*
+Функция фиксирует кооличество зелий у игрока
+*/
 void potionBagUseInfo(struct playerPotionsBag pack,int* count){
     for(int i=0;i<(sizeof(pack)/(sizeof(pack.agilSkils)+sizeof(int)));i++){
         *count+=potionBagChek(*(&pack.healingFlask+i),*(&pack.healingFlaskCount+i),i);
     }
 }
 
+/*
+Функция возвращает количество зелий пользователя и выводит их в консоле
+*/
 int potionBagChek(struct potion potion, int count,int i){
     if(count!=0){
         printf("%d) %s: %d\n",i+1,potion.potionName,count);
@@ -292,6 +321,9 @@ int potionBagChek(struct potion potion, int count,int i){
     }
 }
 
+/*
+функция возвращает состояния выпитого зелья или нет. В случае если зелье не было использовано, героя возвращает в выбор действия
+*/
 _Bool potionBagUse(int hchose, struct player* conection,_Bool* NotUsed){
     switch (hchose)
     {
@@ -420,21 +452,31 @@ void speedEffect(struct player* conection){
     conection->playerPotionsBag.speedEssenceCount--;
     conection->playerEffects.speedChanges+=conection->playerPotionsBag.speedEssence.potionValue;
 }
+
 void luckEffect(struct player* conection){
     conection->playerPotionsBag.luckEssenceCount--;
     conection->playerEffects.speedChanges+=conection->playerPotionsBag.speedEssence.potionValue;
 }
 
+/*
+Функция возвращает количество физического урона, поглощённого бронёй в процентном соотношении
+*/
 float arrmorK(int armor){
     float k = 0.12;
     return (1-(k*armor/(1+k*abs(armor))));
 }
 
+/*
+функция возвращает количество магического урона, поглощёного бронёй в процентном соотношении
+*/
 float magicArrmor(int marr){
     float k=0.2;
     return(1-(k*marr/(1+k*abs(marr))));
 }
 
+/*
+функция возвращает состояние здоровья героя PS потом будет процентное определение для отображение графически количества здоровья
+*/
 _Bool PlayerHealth(int helth){
     if(helth<=0){
         return true;
@@ -444,6 +486,9 @@ _Bool PlayerHealth(int helth){
     }
 }
 
+/*
+Функция выполняет расчёт, получит ли урон герой, сколько урона он получит
+*/
 void damageTaken(struct player* conection, struct enemy* enemy){
     int chance;
     int randCh = rand()%100;
@@ -477,6 +522,9 @@ void damageTaken(struct player* conection, struct enemy* enemy){
     }
 }
 
+/*
+Функция возвращает количество урона по типу проходящего урона расчитывая всю броню по эффектам, броне, пасивной броне и т.д.
+*/
 int arrBackType(int type,struct player* conection){
     switch (type)
     {
@@ -508,6 +556,9 @@ int arrBackType(int type,struct player* conection){
     }
 }
 
+/*
+Функция возвращает количество брони, исходя из типа урона на входе и всех расчётов брони противника
+*/
 int armBackTypeEnemy(int type, struct enemy enemy){
     switch (type)
     {

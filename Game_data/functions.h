@@ -4,6 +4,9 @@
 В случае с другими структурами, мы просто копируем из них данные, либо создаём клон структуры на определённый ход.
 */
 
+/*
+Функция получает на вход структуру пользователя и заполняет исходя из выборов пользователя
+*/
 void createHero(struct player* conection){
     int hchose; 
     _Bool cheker,cheker2;
@@ -109,6 +112,9 @@ void createHero(struct player* conection){
     conection->playerScore=0;
 }
 
+/*
+Выводит информцию о пользователе исходя из его класса
+*/
 void info(struct player* conection){
     char xxx;
     printf("Нажмите Enter, чтобы перейти в меню\n");
@@ -132,10 +138,17 @@ void info(struct player* conection){
     scanf("%c",&xxx);
 };
 
+/*
+Выводит рандомное число по x 
+*/
 int randexpf(int x){
     return rand()%(x);
 };
 
+/*
+Функция проверяет ввод целочисленных записей по его размерности, 
+если целое числно выходит за рамки типа данных int или это строка, то возвращается 0
+*/
 int IntPlayerChoose(){
     char buf[80];
     int x;
@@ -146,6 +159,9 @@ int IntPlayerChoose(){
     }
 };
 
+/*
+Функция проверяет, хватает ли пользователю опыта, чтобы перейти на новый уровень
+*/
 void LvlExperienceUp(struct player* conection){
     switch (conection->playerLvl)
     {
@@ -199,6 +215,9 @@ void LvlExperienceUp(struct player* conection){
     }
 }
 
+/*
+Изменяет статы пользователя исходя из его класса приростов
+*/
 void LvlStatsUp(struct player* conection){
     printf("Вы повысили уровень! Теперь ваш уровень %d\n", conection->playerLvl);
     switch (conection->playerClass)
@@ -229,6 +248,9 @@ void LvlStatsUp(struct player* conection){
     }
 }
 
+/*
+Демо функция, которая отправлеяет пользователя в путешествие
+*/
 void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
     switch (hchose)
     {
@@ -246,6 +268,9 @@ void TrevelLobby(int hchose, _Bool* cheker,struct player* conection){
     }
 }
 
+/*
+Функция исцеляет героя в зависимости от количества часов проведённого в релаксе
+*/
 void relax(int time_spand, struct player* conecntion)
 {
     int new_hp;
@@ -263,6 +288,9 @@ void relax(int time_spand, struct player* conecntion)
     }
 }
 
+/*
+Функция выводит меню выбора пользователя в Main тауне
+*/
 void gameSelectMenu(struct player* conecntion){
     int hchose;
     _Bool cheker;
@@ -329,6 +357,9 @@ void gameSelectMenu(struct player* conecntion){
 }
 }
 
+/*
+Функция выводит все эффекты пользователя
+*/
 void statusEffectsPlayer(struct player* conection){
     printf("Ваши эффекты:\nброня - %d\nурон - %d\nинтелект - %d\nловкость - %d\nсила - %d\nскорость - %d\nудача - %d\n",
     conection->playerEffects.armourChanges,conection->playerEffects.damageChanges,conection->playerEffects.mindChanges,
@@ -336,6 +367,9 @@ void statusEffectsPlayer(struct player* conection){
     conection->playerEffects.luckChanges);
 }
 
+/*
+Функция присваивает значения выбранного класа пользователю 
+*/
 void classSelector(struct player* conection, struct class class){
     conection->PlayerPassiveArmor = class.armourPassive;
     conection->playerClass = class.classId;
@@ -351,6 +385,9 @@ void classSelector(struct player* conection, struct class class){
     conection->playerHP = class.hp;
 }
 
+/*
+Функция возвращает информацию брони у кузнеца
+*/
 void ArmorItemInfo(struct armor armor){
     switch (armor.update)
     {
@@ -364,6 +401,9 @@ void ArmorItemInfo(struct armor armor){
     
 }
 
+/*
+Функция возвращает описание оружия у кузнеца
+*/
 void WeaponItemInfo(struct weapon weapon){
     switch (weapon.type)
     {
@@ -403,6 +443,9 @@ void WeaponItemInfo(struct weapon weapon){
     }
 }
 
+/*
+Функция, которая вызывается в конце игры, для отображения времени проведённого в игре
+*/
 void EndGame(time_t begin){
     time_t end,razn;
     end=time(NULL); 
@@ -411,6 +454,9 @@ void EndGame(time_t begin){
     printf("Вы провели в игре %ldч:%ldм:%ldс\n",(razn/60/60),(razn/60)%60,razn%60);
 }
 
+/*
+Выводит портфель зелий игрока
+*/
 void potionInfo(struct playerPotionsBag pack){
     printf("Ваши зелья:\n");
     for(int i=0;i<(sizeof(pack)/(sizeof(pack.agilSkils)+sizeof(int)));i++){
@@ -418,12 +464,18 @@ void potionInfo(struct playerPotionsBag pack){
     }
 }
 
+/*
+Функция выводит описание зелья если его количество, не равно нулю
+*/
 void potionChekInfo(struct potion potion, int count){
     if(count!=0){
         printf("%s: %d\n",potion.potionName,count);
     }
 }
 
+/*
+фукнкция изменяет количество часов на change и проверяет на смену дней
+*/
 void timeChanges(int change){
     main_time+=change;
     if(main_time>24){
@@ -432,6 +484,9 @@ void timeChanges(int change){
     }
 }
 
+/*
+Функция проверяет состояние врмени в днях увеличивая его количество на change
+*/
 void dayChange(int change){
     main_day+=change;
     if(main_day>30){

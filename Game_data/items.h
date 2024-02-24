@@ -1,35 +1,35 @@
-struct weapon dagger = {"Даггер",1, 3, 10, 0,2};  // базовое оружие вора
-struct weapon thiefsBlade = {"Клинок Вора",1, 3, 35, 0, 2.5};
-struct weapon spire = {"Копьё",2, 2, 10, 0,1.5};  // базовое оружие танка
-struct weapon twoHandedSword ={"Двуручный мечь",2, 2, 30, 0,1.75};
-struct weapon staff = {"Магический посох", 4, 1, 10, 0,1};  // базовое оружие мага
-struct weapon WizardStaff ={"Посох грома",5,1,50,0,1.4};
-struct weapon hands = {"Руки",1,2,0,-1,1};     //   Базовое оружие любого персонажа у которого нет оружия
+struct weapon dagger = {.name="Даггер",.range=1,.type=3, .cost=10, .update=0,.damage=2};  // базовое оружие вора
+struct weapon thiefsBlade = {.name="Клинок Вора",.range=1,.type=3, .cost=35, .update=0, .damage=2.5};
+struct weapon spire = {.name="Копьё",.range=2, .type=2, .cost=10, .update=0,.damage=1.5};  // базовое оружие танка
+struct weapon twoHandedSword ={.name="Двуручный мечь",.range=2, .type=2, .cost=30, .update=0,.damage=1.75};
+struct weapon staff = {.name="Магический посох", .range=4, .type=1, .cost=10, .update=0,.damage=1};  // базовое оружие мага
+struct weapon WizardStaff ={.name="Посох грома",.range=5,.type=1,.cost=50,.update=0,.damage=1.4};
+struct weapon hands = {.name="Руки",.range=1,.type=2,.cost=0,.update=-1,.damage=1};     //   Базовое оружие любого персонажа у которого нет оружия
 
-struct armor rags = {"rags",3, 3,5,0};  // Базовая броня вора
-struct armor armour = {"Броня",1, 6,20,0};  // Базова броня танка
-struct armor robe = {"Роба",2, 2,6,0};    // Базовая броня мага
-struct armor HiddenChainmail ={"Броня со скрытой кольчугой",3,5,15,0};
-struct armor MehaArmor = {"Механическая броня",1,8,30,0};
-struct armor cultRobe = {"Роба культиста",2,4,10,0};
+struct armor rags = {.name="rags",.type=3,.defence=3,.cost=5,.update=0};  // Базовая броня вора
+struct armor armour = {.name="Броня",.type=1, .defence=6,.cost=20,.update=0};  // Базова броня танка
+struct armor robe = {.name="Роба",.type=2, .defence=2,.cost=6,.update=0};    // Базовая броня мага
+struct armor HiddenChainmail ={.name="Броня со скрытой кольчугой",.type=3,.defence=5,.cost=15,.update=0};
+struct armor MehaArmor = {.name="Механическая броня",.type=1,.defence=8,.cost=30,.update=0};
+struct armor cultRobe = {.name="Роба культиста",.type=2,.defence=4,.cost=10,.update=0};
 
-struct GameItem wolfSkin = {"Волчья шкура",1,5};
-struct GameItem bearSkin = {"Медвежья шкура",1, 10};
-struct GameItem theMonkeyBar = {"Посох макакаки",1, 90};
-struct GameItem flowerOfRestoration = {"Цветок востановления",1,6};
-struct GameItem OvnerTavernLatter ={"Письмо в другой город",2,0};
+struct GameItem wolfSkin = {.itemName = "Волчья шкура",.itemCode=1,.itemCost=5};
+struct GameItem bearSkin = {.itemName ="Медвежья шкура",.itemCode=1, .itemCost=10};
+struct GameItem theMonkeyBar = {.itemName ="Посох макакаки",.itemCode=1, .itemCost=90};
+struct GameItem flowerOfRestoration = {.itemName ="Цветок востановления",.itemCode=1,.itemCost=6};
+struct GameItem OvnerTavernLatter ={.itemName ="Письмо в другой город",.itemCode=2,.itemCost=0};
 
 /*
 Это базовый пак зелек  
 */
 
-struct potion healingFlask ={"Зелье востаноления", 1, 15, 8};
-struct potion stoneSkin = {"Зелье каменной кожи",2,5,14};
-struct potion magicEssence={"Зелье магической эсенсии",3,8,10};
-struct potion agilSkils ={"Зелье ловкости",4,8,10};
-struct potion strongEssence={"Зелье силы",5,8,10};
-struct potion speedEssence ={"Зелье скорости", 6,5,20};
-struct potion luckEssence ={"Зелье удачи",7,2,30};
+struct potion healingFlask ={.potionName="Зелье востаноления",.potionType=1,.potionValue=15,.cost=8};
+struct potion stoneSkin = {.potionName="Зелье каменной кожи",.potionType=2,.potionValue=5,.cost=14};
+struct potion magicEssence={.potionName="Зелье магической эсенсии",.potionType=3,.potionValue=8,.cost=10};
+struct potion agilSkils ={.potionName="Зелье ловкости",.potionType=4,.potionValue=8,.cost=10};
+struct potion strongEssence={.potionName="Зелье силы",.potionType=5,.potionValue=8,.cost=10};
+struct potion speedEssence ={.potionName="Зелье скорости",.potionType=6,.potionValue=5,.cost=20};
+struct potion luckEssence ={.potionName="Зелье удачи",.potionType=7,.potionValue=2,.cost=30};
 
 struct effects playerEffects = {0,0,0,0,0,0,0};     //  базовый объект эффектов для игрока
 struct effects enemyEffects = {0,0,0,0,0,0,0};     //   отсутствие эффектов на противнике тоже должно записываться. Если противников будет несколько то нужно больше объектов этих структур
