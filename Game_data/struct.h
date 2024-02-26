@@ -1,6 +1,6 @@
-#define NAMES   50
-#define DESCRIPTION 500
-
+#define NAMES     50
+#define DESCRIPTION     500
+#define SIZE_INV_COLLOMS    5
 struct effects
 {
     int armourChanges,damageChanges,mindChanges,strongChanges,agilChanges,speedChanges,luckChanges;
@@ -110,9 +110,9 @@ struct playerPotionsBag
 
 struct inv
 {
-    struct weapon per_wep[4];
-    struct armor per_arm[4];
-    struct GameItem GameItem[5];
+    struct weapon per_wep[SIZE_INV_COLLOMS];
+    struct armor per_arm[SIZE_INV_COLLOMS];
+    struct GameItem GameItem[SIZE_INV_COLLOMS];
 }pack;
 
 struct player 

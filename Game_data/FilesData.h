@@ -72,6 +72,9 @@ void potionArr();
 void QestComplyteRevards(int, int,struct player*);
 void timeChanges(int);
 void dayChange(int);
+void show_inv(struct player*);
+void init_inv_start(struct player*);
+int index_free_slot(struct player *, int);
 
 #include "tradersQests.h"
 #include "traders.h"

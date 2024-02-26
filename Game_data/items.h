@@ -1,4 +1,4 @@
-struct weapon dagger = {.name="Даггер",.range=1,.type=3, .cost=10, .update=0,.damage=2};  // базовое оружие вора
+struct weapon dagger = {.name="dagger",.range=1,.type=3, .cost=10, .update=0,.damage=2};  // базовое оружие вора
 struct weapon thiefsBlade = {.name="Клинок Вора",.range=1,.type=3, .cost=35, .update=0, .damage=2.5};
 struct weapon spire = {.name="Копьё",.range=2, .type=2, .cost=10, .update=0,.damage=1.5};  // базовое оружие танка
 struct weapon twoHandedSword ={.name="Двуручный мечь",.range=2, .type=2, .cost=30, .update=0,.damage=1.75};

@@ -10,6 +10,7 @@
 void createHero(struct player* conection){
     int hchose; 
     _Bool cheker,cheker2;
+    init_inv_start(conection);
     printf("\nПриветствую тебя путешественник? Как тебя зовут?\n");
     scanf("%s\0\n", conection->playerName);
     printf("Привет %s! Какой класс ты выберешь?\n1)маг\n2)вор\n3)Танк\n",conection->playerName);
@@ -317,8 +318,20 @@ void gameSelectMenu(struct player* conecntion){
                     break;
                 case 3:
                     system("clear");
-                    info(conecntion);
-                    system("clear");
+                    printf("1)Статы\n2)Инвентарь\n");
+                    int chec;
+                    scanf("%d", &chec);
+                    switch (chec)
+                    {
+                    case 1:
+                        info(conecntion);
+                        break;
+                    case 2:
+                        show_inv(conecntion);
+                        break;
+                    default:
+                        break;
+                    }
                     break;
                 case 4:
                     system("clear");
@@ -357,6 +370,57 @@ void gameSelectMenu(struct player* conecntion){
 }
 }
 
+void show_inv(struct player* conecntion)             //Вывод структуры инвенторя в симпотичной форме
+{
+    puts("|     Оружие     |     Броня     |Особые предметы|");
+    for (int i = 0; i < SIZE_INV_COLLOMS; i++)
+    {
+        printf("|%-16s|", conecntion->pack.per_wep[i].name);
+        printf("%-15s|", conecntion->pack.per_arm[i].name);
+        printf("%-15s|", conecntion->pack.GameItem[i].itemName);
+        puts("");
+    }
+}
+
+void init_inv_start(struct player* conecntion)      //Чтобы обозначить свободные слоты массива, присваивает символ конца строки имени
+{
+    for (int i = 0; i < SIZE_INV_COLLOMS; i++)
+    {
+        *conecntion->pack.per_wep[i].name = '\0';
+    }
+    for (int i = 0; i < SIZE_INV_COLLOMS; i++)
+    {
+        *conecntion->pack.per_arm[i].name = '\0';
+    }
+    for (int i = 0; i < SIZE_INV_COLLOMS; i++)
+    {
+        *conecntion->pack.GameItem[i].itemName = '\0';
+    }
+}
+
+int index_free_slot(struct player* conections, int part_inv)    //Функция возвращает номер первого свободного слота инвентаря
+{
+    int index = 0;
+    switch(part_inv)
+    {
+    case 1:
+        while(index++<SIZE_INV_COLLOMS && *conections->pack.per_wep[index].name != '\0');
+        break;
+    case 2:
+        while(index++<SIZE_INV_COLLOMS && *conections->pack.per_arm[index].name != '\0');
+        break;
+    case 3:
+        while(index++<SIZE_INV_COLLOMS && *conections->pack.GameItem[index].itemName != '\0');
+        break;
+    }
+    if(index<5)
+    {
+        return index;
+    }
+    puts("Инвентарь заполнен!");
+    return -1;
+}
+
 /*
 Функция выводит все эффекты пользователя
 */
@@ -371,6 +435,8 @@ void statusEffectsPlayer(struct player* conection){
 Функция присваивает значения выбранного класа пользователю 
 */
 void classSelector(struct player* conection, struct class class){
+    conection->pack.per_wep[0] = class.classWeapon;
+    conection->pack.per_arm[0] = class.classArmour;
     conection->PlayerPassiveArmor = class.armourPassive;
     conection->playerClass = class.classId;
     conection->playerMind = class.mind;
